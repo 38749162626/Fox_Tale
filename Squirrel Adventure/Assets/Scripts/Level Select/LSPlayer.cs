@@ -16,7 +16,7 @@ public class LSPlayer : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, currentPoint.transform.position) < 0.1f && (Input.anyKeyDown || MobileInput.instance.isJumpPressed) && !levelLoading)
+        if (Vector3.Distance(transform.position, currentPoint.transform.position) < 0.1f && (Input.anyKeyDown || MobileInput.instance != null && MobileInput.instance.isJumpPressed) && !levelLoading)
         {
             if (Input.GetAxisRaw("Horizontal") > 0.5f || VirtualJoystick.GetAxisRaw("Horizontal") > 0.5f)
             {
@@ -46,9 +46,9 @@ public class LSPlayer : MonoBehaviour
                     SetNextPoint(currentPoint.down);
                 }
             }
-            else if (currentPoint.isLevel)
+            else if (currentPoint.isLevel && currentPoint.levelToLoad != "")
             {
-                if (Input.GetButtonDown("Jump") || MobileInput.instance.isJumpPressed)
+                if (Input.GetButtonDown("Jump") || MobileInput.instance != null && MobileInput.instance.isJumpPressed)
                 {
                     levelLoading = true;
 
