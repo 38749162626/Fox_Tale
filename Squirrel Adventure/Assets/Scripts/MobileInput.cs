@@ -14,6 +14,18 @@ public class MobileInput : MonoBehaviour
         instance = this;
     }
 
+    void Start()
+    {
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     void Update()
     {
         if (pressedTimer > 0)
