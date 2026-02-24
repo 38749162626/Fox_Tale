@@ -74,6 +74,8 @@ public class PauseMenu : MonoBehaviour
 
     public void LevelSelect()
     {
+        PlayerPrefs.SetString("CurrentLevel", SceneManager.GetActiveScene().name);
+
         StartCoroutine(LevelSelectCo());
     }
 

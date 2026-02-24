@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
+
+    public bool stopTiming;
 
     [Header("下个关卡名称")]
     public string levelToLoad;
@@ -13,12 +16,25 @@ public class LevelManager : MonoBehaviour
     [Header("检查点相关")]
     public float waitToRespawnTime;
 
-    [Header("拾取物相关")]
+    [Header("拾取物和时间")]
     public int gemsCollected;
+    public float timeInLevel;
 
     void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
+        timeInLevel = 0;
+        stopTiming = false;
+    }
+
+    void Update()
+    {
+        if(!stopTiming)
+            timeInLevel += Time.deltaTime;
     }
 
     #region 玩家复活相关
@@ -36,6 +52,8 @@ public class LevelManager : MonoBehaviour
     // 协程使用 IEnumerator 返回类型，允许使用 yield 关键字暂停执行
     private IEnumerator RespawnCo()
     {
+        stopTiming = true;
+
         // 将玩家游戏对象设置为非激活状态
         PlayerController.instance.gameObject.SetActive(false);
 
@@ -72,6 +90,8 @@ public class LevelManager : MonoBehaviour
 
         //重置角色血量
         PlayerHealthControl.instance.ResetHealth();
+
+        stopTiming = false;
 
         // 协程执行完毕，自动结束
     }
@@ -117,6 +137,8 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator EndLevelCo()
     {
+        stopTiming = true;
+
         //停止移动和相机跟随
         PlayerController.instance.stopInput = true;
         CameraController.instance.stopFollow = true;
@@ -130,7 +152,34 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f / FadeScreenController.instance.fadeSpeed + 0.25f);
 
+        // 将当前激活场景的解锁状态保存到 PlayerPrefs 中
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        PlayerPrefs.SetString("CurrentLevel", SceneManager.GetActiveScene().name);
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_gems"))
+        {
+            if (gemsCollected > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_gems"))
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemsCollected);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemsCollected);
+        }
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_time")) 
+        {
+            if (timeInLevel < PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_time")) 
+            {
+                PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+        }
+
 
         //加载下个场景
         SceneManager.LoadScene(levelToLoad);

@@ -10,6 +10,7 @@ public class LSCameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        // 计算目标对象在X轴和Y轴上的位置，并限制在指定范围内
         float xPos = Mathf.Clamp(target.position.x, minPos.x, maxPos.x);
         float yPos = Mathf.Clamp(target.position.y, minPos.y, maxPos.y);
 

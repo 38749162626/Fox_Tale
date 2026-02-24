@@ -20,6 +20,9 @@ public class UIController : MonoBehaviour
     [Header("宝石相关")]
     public Text gemText;
 
+    [Header("时间相关")]
+    public Text timeText;
+
     [Header("结束屏幕相关")]
     public GameObject levelCompleteText;
 
@@ -38,7 +41,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-
+        timeText.text = LevelManager.instance.timeInLevel.ToString("F1") + "s";
     }
 
     #region 血量相关

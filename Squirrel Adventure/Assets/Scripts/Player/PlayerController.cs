@@ -193,11 +193,15 @@ public class PlayerController : MonoBehaviour
 
     private void DisactivePlayer()
     {
+        LevelManager.instance.stopTiming = true;
+
         gameObject.SetActive(false);
     }
 
     public void ActivePlayer()
     {
+        LevelManager.instance.stopTiming = false;
+
         gameObject.SetActive(true);
     }
 
