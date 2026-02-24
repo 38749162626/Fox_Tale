@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Sences/Main_Menu.unity
     guid: 06eea3cb29f02a241a9b45ed308b4f1d
   - enabled: 1
-    path: Assets/Sences/LevelSelect.unity
+    path: Assets/Sences/Level_Select.unity
     guid: 88dbd5b41b6a30341bf8fcc9764eb3db
   - enabled: 1
     path: Assets/Sences/Level_1-1.unity

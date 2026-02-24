@@ -7,18 +7,23 @@ public class LSUIController : MonoBehaviour
 {
     public static LSUIController instance;
 
+    public GameObject levelInfoPanel;
+    public Text levelName;
+
     private void Awake()
     {
         instance = this;
     }
 
-    void Start()
+    public void ShowInfo(MapPoint levelInfo)
     {
+        levelName.text = levelInfo.levelName;
 
+        levelInfoPanel.SetActive(true);
     }
 
-    void Update()
+    public void HideInfo()
     {
-
+        levelInfoPanel.SetActive(false);
     }
 }

@@ -1153,7 +1153,7 @@ MonoBehaviour:
   isPaused: 0
   pausedTimer: 0
   mainMenu: Main_Menu
-  levelSelect: LevelSelect
+  levelSelect: Level_Select
 --- !u!1 &3467968236895914397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dbd0a6d38ab9043bb4ce5448dac9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Main_Menu
+  levelToLoad: Level_Select
   waitToRespawnTime: 2
   gemsCollected: 0
 --- !u!1 &7221793219966633672

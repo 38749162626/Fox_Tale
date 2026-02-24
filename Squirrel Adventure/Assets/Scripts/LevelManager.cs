@@ -130,6 +130,8 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f / FadeScreenController.instance.fadeSpeed + 0.25f);
 
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+
         //加载下个场景
         SceneManager.LoadScene(levelToLoad);
     }
