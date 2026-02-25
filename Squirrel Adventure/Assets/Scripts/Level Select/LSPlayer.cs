@@ -92,8 +92,6 @@ public class LSPlayer : MonoBehaviour
             AudioManager.instance.PlaySoundEffect(2);
 
             anim.SetTrigger("Quiver");
-
-            Handheld.Vibrate();
         }
 
     }

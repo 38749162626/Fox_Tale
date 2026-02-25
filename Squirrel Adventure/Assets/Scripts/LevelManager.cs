@@ -68,9 +68,6 @@ public class LevelManager : MonoBehaviour
         // 这里给玩家一个短暂的"死亡时间"
         yield return new WaitForSeconds(waitToRespawnTime - (1f / FadeScreenController.instance.fadeSpeed));
 
-        //重置角色血量
-        PlayerHealthControl.instance.ResetHealth();
-
         //淡出场景
         FadeScreenController.instance.FadeToBlack();
 
@@ -90,6 +87,8 @@ public class LevelManager : MonoBehaviour
 
         // 重新激活玩家游戏对象
         PlayerController.instance.gameObject.SetActive(true);
+
+        PlayerHealthControl.instance.ResetHealth();
 
         stopTiming = false;
 

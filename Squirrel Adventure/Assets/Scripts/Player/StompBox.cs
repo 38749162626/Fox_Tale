@@ -18,8 +18,6 @@ public class StompBox : MonoBehaviour
 
             //½ÇÉ«µ¯Ìø
             PlayerController.instance.Bounce();
-
-            Handheld.Vibrate();
         }
     }
 }

@@ -11,8 +11,6 @@ public class DamgePlayer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerHealthControl.instance.DealDamage(damgeHealth);
-
-            Handheld.Vibrate();
         }
     }
 }
