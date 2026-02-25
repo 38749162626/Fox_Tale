@@ -30,7 +30,8 @@ public class PlayerHealthControl : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
-        currentHealth = maxHealth;
+
+        ResetHealth();
     }
 
     void Update()

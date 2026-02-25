@@ -89,9 +89,11 @@ public class LSPlayer : MonoBehaviour
         {
             currentPoint = lastPoint;
 
-            AudioManager.instance.PlaySoundEffect(9);
+            AudioManager.instance.PlaySoundEffect(2);
 
             anim.SetTrigger("Quiver");
+
+            Handheld.Vibrate();
         }
 
     }
@@ -107,6 +109,6 @@ public class LSPlayer : MonoBehaviour
 
         LSUIController.instance.HideInfo();
 
-        AudioManager.instance.PlaySoundEffect(5);
+        AudioManager.instance.PlaySoundEffect(1);
     }
 }

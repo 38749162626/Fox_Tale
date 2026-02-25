@@ -33,7 +33,7 @@ public class LSManager : MonoBehaviour
 
     public IEnumerator LoadLevelCo()
     {
-        AudioManager.instance.PlaySoundEffect(4);
+        AudioManager.instance.PlaySoundEffect(0);
 
         FadeScreenController.instance.FadeToBlack();
 

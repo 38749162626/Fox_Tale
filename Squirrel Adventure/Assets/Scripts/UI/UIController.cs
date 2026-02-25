@@ -13,8 +13,9 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     [Header("血量相关")]
-    public Image[] UI_hearts;
-
+    public GameObject healthPanel;
+    public List<Image> UI_hearts;
+    public GameObject heartPre;
     public Sprite heartFull, heartHalf, heartEmpty;
 
     [Header("宝石相关")]
@@ -33,7 +34,8 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        UpdataHealthToMax();
+        UI_hearts = new List<Image>();
+
         UpdataGemCount();
 
         levelCompleteText.SetActive(false);
@@ -56,8 +58,26 @@ public class UIController : MonoBehaviour
         int currentHealth = PlayerHealthControl.instance.currentHealth;
         int maxHealth = PlayerHealthControl.instance.maxHealth;
 
+        if(healthPanel.transform.childCount > maxHealth / 2)
+        {
+            for(int i = healthPanel.transform.childCount - maxHealth / 2; i > 0; i--)
+            {
+                UI_hearts.Remove(healthPanel.transform.GetChild(i).GetComponent<Image>());
+                Destroy(healthPanel.transform.GetChild(i).gameObject);
+            }
+        }
+        if(healthPanel.transform.childCount < maxHealth / 2)
+        {
+            for (int i =  maxHealth / 2 - healthPanel.transform.childCount; i > 0; i--)
+            {
+                GameObject newHeart = Instantiate(heartPre, healthPanel.transform);
+                newHeart.name = "Heart" + (maxHealth / 2 - i + 1);
+                UI_hearts.Add(newHeart.GetComponent<Image>());
+            }
+        }
+
         // 遍历所有心形UI元素，根据血量设置对应的精灵图片
-        for (int i = 0; i < maxHealth / 2f ; i++)
+        for (int i = 0; i < maxHealth / 2f; i++)
         {
             //每颗心对应两滴血
             int heartIndex = i * 2;
@@ -66,7 +86,7 @@ public class UIController : MonoBehaviour
             {
                 UI_hearts[i].sprite = heartFull;
             }
-            else if(currentHealth == heartIndex + 1)
+            else if (currentHealth == heartIndex + 1)
             {
                 UI_hearts[i].sprite = heartHalf;
             }

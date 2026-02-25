@@ -9615,14 +9615,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
-      propertyPath: offsetAmount_Far.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
-      propertyPath: offsetAmount_Mid.x
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 1389931207860564442, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
