@@ -8,25 +8,22 @@ using Terresquall;
 /// </summary>
 public class LSPlayer : MonoBehaviour
 {
-    /// <summary>
-    /// 当前玩家所在的位置点。
-    /// </summary>
-    public MapPoint currentPoint;
+    private Animator anim;
 
-    /// <summary>
-    /// 玩家的移动速度。
-    /// </summary>
+    // 当前玩家所在的位置点。
+    public MapPoint currentPoint;
+    public MapPoint lastPoint;
+
     public float moveSpeed = 10f;
 
-    /// <summary>
-    /// 标记是否正在加载关卡。
-    /// </summary>
     private bool levelLoading;
 
-    /// <summary>
-    /// 关卡管理器实例，用于加载关卡。
-    /// </summary>
     public LSManager theManager;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -88,6 +85,15 @@ public class LSPlayer : MonoBehaviour
                 LSUIController.instance.ShowInfo(currentPoint);
             }
         }
+        else if (Vector3.Distance(transform.position, currentPoint.transform.position) < 1f && currentPoint.isLevel && currentPoint.isLocked)
+        {
+            currentPoint = lastPoint;
+
+            AudioManager.instance.PlaySoundEffect(9);
+
+            anim.SetTrigger("Quiver");
+        }
+
     }
 
     /// <summary>
@@ -96,7 +102,9 @@ public class LSPlayer : MonoBehaviour
     /// <param name="nextpoint">下一个目标点。</param>
     public void SetNextPoint(MapPoint nextpoint)
     {
+        lastPoint = currentPoint;
         currentPoint = nextpoint;
+
         LSUIController.instance.HideInfo();
 
         AudioManager.instance.PlaySoundEffect(5);

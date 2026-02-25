@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 /// <summary>
@@ -24,9 +25,10 @@ public class MapPoint : MonoBehaviour
     public int totalGems;
     public float bestTime, targetTime;
 
-    [Header("½±ÅÆ")]
+    [Header("½±ÅÆºÍËø")]
     public GameObject gemBadge;
     public GameObject timeBadge;
+    public GameObject locked;
 
     void Start()
     {
@@ -70,6 +72,15 @@ public class MapPoint : MonoBehaviour
             {
                 isLocked = false;
             }
+        }
+
+        if (isLevel && isLocked)
+        {
+            locked.SetActive(true);
+        }
+        else
+        {
+            locked.SetActive(false);
         }
     }
 }
