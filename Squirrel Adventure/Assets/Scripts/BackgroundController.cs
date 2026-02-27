@@ -34,7 +34,7 @@ public class BackgroundController : MonoBehaviour
         // 更新标记点坐标
         leftPos.position = new Vector3(leftPos.position.x + xPos, leftPos.position.y, leftPos.position.z);
         rightPos.position = new Vector3(rightPos.position.x + xPos, rightPos.position.y, rightPos.position.z);
-        
+
         // 自动获取背景长度
         backgroundLength = Background.GetComponent<SpriteRenderer>().bounds.size.x;
     }

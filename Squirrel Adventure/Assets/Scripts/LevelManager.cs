@@ -74,6 +74,8 @@ public class LevelManager : MonoBehaviour
         //等待淡出完
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + 0.2f);
 
+        PlayerHealthControl.instance.ResetHealth();
+
         //淡入场景
         FadeScreenController.instance.FadeFromBlack();
 
@@ -87,8 +89,6 @@ public class LevelManager : MonoBehaviour
 
         // 重新激活玩家游戏对象
         PlayerController.instance.gameObject.SetActive(true);
-
-        PlayerHealthControl.instance.ResetHealth();
 
         stopTiming = false;
 
@@ -136,6 +136,8 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator EndLevelCo()
     {
+        AudioManager.instance.PlayLevelVictory();
+
         stopTiming = true;
 
         //停止移动和相机跟随
@@ -149,7 +151,7 @@ public class LevelManager : MonoBehaviour
 
         FadeScreenController.instance.FadeToBlack();
 
-        yield return new WaitForSeconds(1f / FadeScreenController.instance.fadeSpeed + 0.25f);
+        yield return new WaitForSeconds(1f / FadeScreenController.instance.fadeSpeed + 2f);
 
         // 将当前激活场景的解锁状态保存到 PlayerPrefs 中
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);

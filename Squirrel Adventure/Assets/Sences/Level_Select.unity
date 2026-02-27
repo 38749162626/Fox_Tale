@@ -50106,8 +50106,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelName
+      value: '4: One Way Platform ! ! !'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: totalGems
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: targetTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: levelToLoad
-      value: 
+      value: Level_1-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelToCheck
+      value: Level_1-3
       objectReference: {fileID: 0}
     - target: {fileID: 2177095502650137850, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: m_LocalPosition.x

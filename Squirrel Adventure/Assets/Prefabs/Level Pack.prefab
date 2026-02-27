@@ -1107,11 +1107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPanel: {fileID: 5630533834941923937}
-  UI_hearts: []
-  heartPre: {fileID: 232973286125144516, guid: 94ae9eefeaaa0fa449326dee2ccdcc92, type: 3}
-  heartFull: {fileID: 8109154662235370213, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
-  heartHalf: {fileID: 2139837793675082937, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
-  heartEmpty: {fileID: -4390673095631447188, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
+  heart_Full: {fileID: 232973286125144516, guid: 94ae9eefeaaa0fa449326dee2ccdcc92, type: 3}
+  heart_Half: {fileID: 232973286125144516, guid: ab97bb55c52d162488178acedaeb26b3, type: 3}
+  heart_Empty: {fileID: 232973286125144516, guid: 9c3e1ab4bf82fed4b84c8dcdac293b38, type: 3}
   gemText: {fileID: 4265448238241071422}
   timeText: {fileID: 220757819164123913}
   levelCompleteText: {fileID: 7221793219966633672}

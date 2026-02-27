@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4875003699668781076}
   - component: {fileID: 4641295989429575343}
   m_Layer: 5
-  m_Name: Heart
+  m_Name: Heart_Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8109154662235370213, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
+  m_Sprite: {fileID: -4390673095631447188, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

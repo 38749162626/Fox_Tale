@@ -23,4 +23,10 @@ public class AudioManager : MonoBehaviour
 
         soundEffects[soundToPlay].Play();
     }
+
+    public void PlayLevelVictory()
+    {
+        bgm.Stop();
+        levelEndMusic.Play();
+    }
 }

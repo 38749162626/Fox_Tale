@@ -5,8 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("加载场景名称")]
+    public GameObject firstButtons, secondButtons;
+
+    [Header("场景名称")]
     public string startScene;
+    public string continueScene;
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey(startScene + "_unlocked"))
+        {
+            firstButtons.SetActive(false);
+            secondButtons.SetActive(true);
+        }
+        else
+        {
+            firstButtons.SetActive(true);
+            secondButtons.SetActive(false);
+        }
+    }
 
     public void StartGame()
     {
@@ -19,6 +36,22 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
         SceneManager.LoadScene(startScene);
+
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void ContinueGame()
+    {
+        StartCoroutine(ContinueGameCo());
+    }
+
+    public IEnumerator ContinueGameCo()
+    {
+        FadeScreenController.instance.FadeToBlack();
+
+        yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
+
+        SceneManager.LoadScene(continueScene);
     }
 
     public void QuitGame()

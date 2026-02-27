@@ -202,7 +202,8 @@ MonoBehaviour:
   groundCheckPoint: {fileID: 279280703735700627}
   ground_LayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
+  groundLeaveTimer: 0
   isGround: 0
   canDoubleJump: 0
   knockBackLength: 0.25

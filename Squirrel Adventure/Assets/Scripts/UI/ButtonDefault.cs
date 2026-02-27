@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class ButtonDefault : MonoBehaviour
 {
+    private bool isMouseOver = false;
+
     void Start()
-    { 
-        // 隐藏鼠标指针
+    {
         Cursor.visible = false;
-        // 锁定鼠标指针
         Cursor.lockState = CursorLockMode.Locked;
 
-        // 让这个按钮在开始游戏时获得焦点
         GetComponent<Button>().Select();
     }
+
     void Update()
     {
         // 按下ESC解锁鼠标指针
@@ -23,10 +23,16 @@ public class ButtonDefault : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            isMouseOver = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            isMouseOver = false;
         }
 
-        // 如果当前没有选中，则重新选中
-        if(EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+        if (!isMouseOver && EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
         {
             GetComponent<Button>().Select();
         }

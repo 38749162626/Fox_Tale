@@ -14,9 +14,7 @@ public class UIController : MonoBehaviour
 
     [Header("血量相关")]
     public GameObject healthPanel;
-    public List<Image> UI_hearts;
-    public GameObject heartPre;
-    public Sprite heartFull, heartHalf, heartEmpty;
+    public GameObject heart_Full, heart_Half, heart_Empty;
 
     [Header("宝石相关")]
     public Text gemText;
@@ -34,8 +32,6 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        UI_hearts = new List<Image>();
-
         UpdataGemCount();
 
         levelCompleteText.SetActive(false);
@@ -58,21 +54,11 @@ public class UIController : MonoBehaviour
         int currentHealth = PlayerHealthControl.instance.currentHealth;
         int maxHealth = PlayerHealthControl.instance.maxHealth;
 
-        if(healthPanel.transform.childCount > maxHealth / 2)
+        if(healthPanel.transform.childCount != 0)
         {
-            for(int i = healthPanel.transform.childCount - maxHealth / 2; i > 0; i--)
+            for(int i = healthPanel.transform.childCount; i > 0; i--)
             {
-                UI_hearts.Remove(healthPanel.transform.GetChild(i).GetComponent<Image>());
-                Destroy(healthPanel.transform.GetChild(i).gameObject);
-            }
-        }
-        if(healthPanel.transform.childCount < maxHealth / 2)
-        {
-            for (int i =  maxHealth / 2 - healthPanel.transform.childCount; i > 0; i--)
-            {
-                GameObject newHeart = Instantiate(heartPre, healthPanel.transform);
-                newHeart.name = "Heart" + (maxHealth / 2 - i + 1);
-                UI_hearts.Add(newHeart.GetComponent<Image>());
+                Destroy(healthPanel.transform.GetChild(i - 1).gameObject);
             }
         }
 
@@ -84,24 +70,16 @@ public class UIController : MonoBehaviour
 
             if (currentHealth >= heartIndex + 2)
             {
-                UI_hearts[i].sprite = heartFull;
+                Instantiate(heart_Full, healthPanel.transform);
             }
             else if (currentHealth == heartIndex + 1)
             {
-                UI_hearts[i].sprite = heartHalf;
+                Instantiate(heart_Half, healthPanel.transform);
             }
             else
             {
-                UI_hearts[i].sprite = heartEmpty;
+                Instantiate(heart_Empty, healthPanel.transform);
             }
-        }
-    }
-
-    public void UpdataHealthToMax()
-    {
-        for(int i = 0; i < PlayerHealthControl.instance.maxHealth / 2; i++)
-        {
-            UI_hearts[i].sprite = heartFull;
         }
     }
 
