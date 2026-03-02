@@ -1,3 +1,4 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,9 @@ public class LSManager : MonoBehaviour
 
     public IEnumerator LoadLevelCo()
     {
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.Selection);
+
         AudioManager.instance.PlaySoundEffect(0);
 
         FadeScreenController.instance.FadeToBlack();

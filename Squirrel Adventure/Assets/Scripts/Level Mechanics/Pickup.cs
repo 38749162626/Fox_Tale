@@ -1,3 +1,4 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,9 @@ public class Pickup : MonoBehaviour
             {
                 LevelManager.instance.gemsCollected++;
 
+                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+
                 isCollected = true;
                 Destroy(gameObject);
 
@@ -36,8 +40,11 @@ public class Pickup : MonoBehaviour
             if (isHeal)
             {
                 if(PlayerHealthControl.instance.currentHealth != PlayerHealthControl.instance.maxHealth)
-                {
+                { 
                     PlayerHealthControl.instance.HealPlayer();
+
+                    if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Success);
 
                     isCollected = true;
                     Destroy(gameObject);

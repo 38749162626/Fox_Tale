@@ -16,14 +16,10 @@ public class MobileInput : MonoBehaviour
 
     void Start()
     {
-        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
+        if(Application.isMobilePlatform)
             gameObject.SetActive(true);
-        }
         else
-        {
             gameObject.SetActive(false);
-        }
     }
 
     void Update()

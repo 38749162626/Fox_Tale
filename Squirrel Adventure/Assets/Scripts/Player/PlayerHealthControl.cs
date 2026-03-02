@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Lofelt.NiceVibrations;
 
 public class PlayerHealthControl : MonoBehaviour
 {
@@ -66,6 +66,9 @@ public class PlayerHealthControl : MonoBehaviour
             // ¼ì²éÍæ¼ÒÊÇ·ñËÀÍö
             if (currentHealth <= 0)
             {
+                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+
                 currentHealth = 0;
 
                 anim.SetTrigger("Die");

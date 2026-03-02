@@ -1,3 +1,4 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,6 @@ public class StompBox : MonoBehaviour
         {
             //µ–»ÀÀ¿Õˆ
             other.transform.parent.GetComponent<EnemyController>().EnemyDead();
-
 
             Destroy(other.transform.parent.GetComponent<EnemyController>().rightPoint.gameObject);
             Destroy(other.transform.parent.GetComponent<EnemyController>().leftPoint.gameObject);

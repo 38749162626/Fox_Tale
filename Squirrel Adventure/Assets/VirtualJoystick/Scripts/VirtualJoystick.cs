@@ -463,15 +463,15 @@ namespace Terresquall {
             }
 
             // Output joystick values to any Input Action devices and update.
-#if ENABLE_INPUT_SYSTEM
-            Vector2 delta = GetAxisDelta();
-            if(inputSystemDevice != null && delta.sqrMagnitude > 0) {
-                using (StateEvent.From(inputSystemDevice, out InputEventPtr eventPtr)) {
-                    inputSystemDevice.stick.WriteValueIntoEvent(axis, eventPtr);
-                    InputSystem.QueueEvent(eventPtr);
-                }
-            }
-#endif
+//#if ENABLE_INPUT_SYSTEM
+//            Vector2 delta = GetAxisDelta();
+//            if(inputSystemDevice != null && delta.sqrMagnitude > 0) {
+//                using (StateEvent.From(inputSystemDevice, out InputEventPtr eventPtr)) {
+//                    inputSystemDevice.stick.WriteValueIntoEvent(axis, eventPtr);
+//                    InputSystem.QueueEvent(eventPtr);
+//                }
+//            }
+//#endif
         }
 
         // Takes the mouse's or finger's position and registers OnPointerDown()

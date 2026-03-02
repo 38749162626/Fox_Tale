@@ -1,7 +1,8 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Terresquall;
+using UnityEngine;
 
 /// <summary>
 /// LSPlayer 类用于控制玩家在关卡选择界面中的移动和交互行为。
@@ -85,6 +86,7 @@ public class LSPlayer : MonoBehaviour
                 LSUIController.instance.ShowInfo(currentPoint);
             }
         }
+        // 目标关卡被锁住时，返回上一个目标点
         else if (Vector3.Distance(transform.position, currentPoint.transform.position) < 1f && currentPoint.isLevel && currentPoint.isLocked)
         {
             currentPoint = lastPoint;
@@ -92,6 +94,9 @@ public class LSPlayer : MonoBehaviour
             AudioManager.instance.PlaySoundEffect(2);
 
             anim.SetTrigger("Quiver");
+
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
         }
 
     }

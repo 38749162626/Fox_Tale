@@ -1,7 +1,8 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Terresquall;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -167,12 +168,20 @@ public class PlayerController : MonoBehaviour
         knockBackCounter = knockBackLength;
         //给玩家增加击退力
         rigidbody.velocity = new Vector2(0f, knockBackForce * 2);
+
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
     }
 
     public void Bounce()
     {
         //给玩家增加向上的力
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, bounceForce);
+
+        canDoubleJump = true;
+
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
 
         AudioManager.instance.PlaySoundEffect(10);
     }
