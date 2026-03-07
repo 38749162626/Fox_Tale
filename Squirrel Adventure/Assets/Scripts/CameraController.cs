@@ -57,5 +57,11 @@ public class CameraController : MonoBehaviour
 
             #endregion
         }
+        else
+        {
+            // Í£Ö¹¸úËæÊ±£¬Ö»¸úËæYÖá
+            float clampedY = Mathf.Clamp(target.position.y, minHeight, maxHeight);
+            this.transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
+        }
     }
 }

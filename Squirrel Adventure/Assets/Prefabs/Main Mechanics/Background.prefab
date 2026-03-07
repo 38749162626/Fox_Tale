@@ -166,8 +166,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004104235543710269}
-  - component: {fileID: 7641392670574120851}
-  - component: {fileID: 6523781827483263439}
+  - component: {fileID: 4020537013989612963}
+  - component: {fileID: 3958736589616984594}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -192,7 +192,7 @@ Transform:
   - {fileID: 8467085918595937990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7641392670574120851
+--- !u!114 &4020537013989612963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,18 +201,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6515436680785413012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a8c5b9a650cce4ea2290d9d7ef3cd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 50e449a5d9206a94588d96b3c005924d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Background: {fileID: 1023155202987110981, guid: 9c62e9ee91c8f6040a006b7325691627, type: 3}
-  backgroundLength: 24
-  Parent: {fileID: 8184339019546447005}
-  target: {fileID: 0}
-  leftPos: {fileID: 3431951688378619693}
-  rightPos: {fileID: 7640560465563971152}
-  backgroundAdvance: 0.1
-  instantiateHight: 0.51
---- !u!114 &6523781827483263439
+  mainCamera: {fileID: 0}
+  backgroundParent: {fileID: 8184339019546447005}
+  backgroundPrefabs:
+  - {fileID: 1023155202987110981, guid: 9c62e9ee91c8f6040a006b7325691627, type: 3}
+  yOffset: 0.51
+  generateThreshold: 1
+  recycleThreshold: 2
+--- !u!114 &3958736589616984594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,17 +220,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6515436680785413012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a8c5b9a650cce4ea2290d9d7ef3cd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 50e449a5d9206a94588d96b3c005924d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Background: {fileID: 8540509645548860289, guid: 8522457d3b44fe24f8b1d58e4a3ba8e7, type: 3}
-  backgroundLength: 11
-  Parent: {fileID: 8467085918595937990}
-  target: {fileID: 0}
-  leftPos: {fileID: 7485721391576972429}
-  rightPos: {fileID: 7302754453369096393}
-  backgroundAdvance: 0.1
-  instantiateHight: -9
+  mainCamera: {fileID: 0}
+  backgroundParent: {fileID: 8467085918595937990}
+  backgroundPrefabs:
+  - {fileID: 8540509645548860289, guid: 8522457d3b44fe24f8b1d58e4a3ba8e7, type: 3}
+  yOffset: -9
+  generateThreshold: 1
+  recycleThreshold: 2
 --- !u!1 &8085062671783450983
 GameObject:
   m_ObjectHideFlags: 0

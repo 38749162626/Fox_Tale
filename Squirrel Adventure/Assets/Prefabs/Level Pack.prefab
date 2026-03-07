@@ -1868,6 +1868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8671463115478790413}
     m_Modifications:
+    - target: {fileID: 3958736589616984594, guid: e50cb7f8b65232544830a48d8aea096a, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 521347290957049319}
     - target: {fileID: 4004104235543710269, guid: e50cb7f8b65232544830a48d8aea096a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1908,6 +1912,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4020537013989612963, guid: e50cb7f8b65232544830a48d8aea096a, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 521347290957049319}
     - target: {fileID: 6515436680785413012, guid: e50cb7f8b65232544830a48d8aea096a, type: 3}
       propertyPath: m_Name
       value: Background
@@ -2010,6 +2018,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3693108062433139202}
     m_Modifications:
+    - target: {fileID: 7195966024286504988, guid: 9d9e161438374a440aa7205b5d6e4df7, type: 3}
+      propertyPath: directions
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7195966024286504990, guid: 9d9e161438374a440aa7205b5d6e4df7, type: 3}
       propertyPath: m_Name
       value: Joystick
@@ -2304,6 +2316,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 618d975a56167c34297479ac342d8bb0, type: 3}
+--- !u!20 &521347290957049319 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5896857278732601065, guid: 618d975a56167c34297479ac342d8bb0, type: 3}
+  m_PrefabInstance: {fileID: 6262795051539360526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &888377873572314705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6538606615729001823, guid: 618d975a56167c34297479ac342d8bb0, type: 3}
