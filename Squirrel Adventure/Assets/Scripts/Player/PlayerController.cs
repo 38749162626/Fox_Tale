@@ -215,4 +215,23 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    private Transform parent;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        { 
+            parent = transform.parent;
+            transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            transform.parent = parent;
+        }
+    }
 }

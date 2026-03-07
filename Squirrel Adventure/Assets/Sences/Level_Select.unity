@@ -313,8 +313,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: bestTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: isLocked
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelName
+      value: Move Plarform Challange
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: totalGems
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: targetTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelToLoad
+      value: Level_1-5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelToCheck
+      value: Level_1-4
       objectReference: {fileID: 0}
     - target: {fileID: 2177095502650137850, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53502,13 +53526,13 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 641790624}
   - {fileID: 565743445}
-  - {fileID: 1907171845}
   - {fileID: 936716456}
   - {fileID: 951279460}
   - {fileID: 1886541240}
   - {fileID: 1004194707}
+  - {fileID: 1907171845}
+  - {fileID: 641790624}
   - {fileID: 1619134485}
   - {fileID: 1275069065}
   - {fileID: 1102839579}

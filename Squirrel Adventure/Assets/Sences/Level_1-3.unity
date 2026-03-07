@@ -8206,8 +8206,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -833986277
-  m_SortingLayer: -3
+  m_SortingLayerID: -384786125
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 569b0b9b728b15748a6c1d0415d281c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8993,7 +8993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1647942050}
   m_Layer: 0
-  m_Name: Spikes_Whites
+  m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
