@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7821500756214005911, guid: 4a59e3fffd090324db8349f947249d17, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 832ced79a9978ce4eaa88d553f7a173f, type: 3}
+    - target: {fileID: 9065420408623804802, guid: 4a59e3fffd090324db8349f947249d17, type: 3}
+      propertyPath: checkpointOn
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b6c56e957944bd4c8d837371265d8a9, type: 3}
+    - target: {fileID: 9065420408623804802, guid: 4a59e3fffd090324db8349f947249d17, type: 3}
+      propertyPath: checkpointOff
+      value: 
+      objectReference: {fileID: 21300000, guid: 832ced79a9978ce4eaa88d553f7a173f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

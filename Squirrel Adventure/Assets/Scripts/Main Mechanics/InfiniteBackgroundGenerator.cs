@@ -195,20 +195,4 @@ public class InfiniteBackgroundGenerator : MonoBehaviour
     }
 
     #endregion
-
-    #region 编辑器辅助
-
-    void OnDrawGizmosSelected()
-    {
-        if (backgroundParent != null)
-        {
-            Gizmos.color = Color.yellow;
-            Vector3 parentPos = backgroundParent.position;
-            float bottom = parentPos.y;
-            float top = parentPos.y + (backgroundPrefabs.Count > 0 ? 2f : 5f); // 简单示意
-            // 绘制左右无限延伸的线表示背景区域（可选）
-        }
-    }
-
-    #endregion
 }

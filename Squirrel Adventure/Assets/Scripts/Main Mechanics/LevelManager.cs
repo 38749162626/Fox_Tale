@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -9,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     public bool stopTiming;
+
+    public bool respawnTrigger;
 
     [Header("下个关卡名称")]
     public string levelToLoad;
@@ -33,7 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if(!stopTiming)
+        if (!stopTiming)
             timeInLevel += Time.deltaTime;
     }
 
@@ -76,6 +79,8 @@ public class LevelManager : MonoBehaviour
 
         PlayerHealthControl.instance.ResetHealth();
 
+        StartCoroutine(SetTriggerCo());
+
         //淡入场景
         FadeScreenController.instance.FadeFromBlack();
 
@@ -93,6 +98,13 @@ public class LevelManager : MonoBehaviour
         stopTiming = false;
 
         // 协程执行完毕，自动结束
+    }
+
+    public IEnumerator SetTriggerCo()
+    {
+        respawnTrigger = true;
+        yield return new WaitForNextFrameUnit();
+        respawnTrigger = false;
     }
 
     #region 关于协程的重要说明

@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     [Header("ÔÝÍ£")]
     public bool stopInput;
 
+    private Transform parent;
+
     void Awake()
     {
         instance = this;
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour
         rigidbody.sleepMode = RigidbodySleepMode2D.NeverSleep;
 
         stopInput = false;
+
+        parent = transform.parent;
     }
 
 
@@ -216,20 +220,17 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    private Transform parent;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
         { 
-            parent = transform.parent;
             transform.parent = collision.gameObject.transform;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform" && collision.gameObject != null && collision.gameObject.activeInHierarchy)
         {
             transform.parent = parent;
         }

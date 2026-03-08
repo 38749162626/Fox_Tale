@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5647476056573367155}
   - component: {fileID: 5805551905868089904}
   m_Layer: 0
-  m_Name: Moving Platform
+  m_Name: Long Moving Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 3801352947525711385}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.5, y: -1.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -84,6 +84,10 @@ MonoBehaviour:
   moveSpeed: 2
   currentPointIndex: 0
   platform: {fileID: 7970823859396441494}
+  isTriggered: 0
+  spriteRenderer: {fileID: 0}
+  On_Sprite: {fileID: 0}
+  Off_Sprite: {fileID: 0}
 --- !u!1 &9146666785417835221
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5647476056573367155}
     m_Modifications:
+    - target: {fileID: 2014425104009346701, guid: 16afcd677ea1d83468ffc4a2db4c5361, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2258ab3927f2f54dbb1e6c773fcd00e, type: 3}
     - target: {fileID: 2331843330136812132, guid: 16afcd677ea1d83468ffc4a2db4c5361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -161,6 +169,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2331843330136812132, guid: 16afcd677ea1d83468ffc4a2db4c5361, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619627220636600063, guid: 16afcd677ea1d83468ffc4a2db4c5361, type: 3}
+      propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7021631047601789564, guid: 16afcd677ea1d83468ffc4a2db4c5361, type: 3}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MobileInput : MonoBehaviour
@@ -7,7 +8,6 @@ public class MobileInput : MonoBehaviour
     public static MobileInput instance;
 
     public bool isJumpPressed;
-    private float pressedTimer;
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class MobileInput : MonoBehaviour
 
     void Start()
     {
-        if(Application.isMobilePlatform)
+        if (Application.isMobilePlatform)
             gameObject.SetActive(true);
         else
             gameObject.SetActive(false);
@@ -24,15 +24,18 @@ public class MobileInput : MonoBehaviour
 
     void Update()
     {
-        if (pressedTimer > 0)
-            pressedTimer -= Time.deltaTime;
-        else
-            isJumpPressed = false;
+
     }
 
     public void OnJumpClick()
     {
+        StartCoroutine(JumpPress());
+    }
+
+    private IEnumerator JumpPress()
+    {
         isJumpPressed = true;
-        pressedTimer = 0.000000001f;
+        yield return new WaitForNextFrameUnit();
+        isJumpPressed = false;
     }
 }
