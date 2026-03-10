@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     public Transform[] Points;
     public float moveSpeed;
-    public int currentPointIndex;
+    private int currentPointIndex;
 
     public Transform platform;
 
