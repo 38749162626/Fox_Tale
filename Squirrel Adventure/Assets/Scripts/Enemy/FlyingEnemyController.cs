@@ -60,7 +60,7 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
         else
         {
             // 判断是否不在攻击距离内
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) > distanceToAttackPlayer && !LevelManager.instance.stopTiming)
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) > distanceToAttackPlayer)
             {
                 attackTarget = Vector3.zero;
 
@@ -68,25 +68,28 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
             }
             else
             {
-                // 设置攻击目标
-                if (attackTarget == Vector3.zero)
+                if (!LevelManager.instance.stopTiming)
                 {
-                    attackTarget = PlayerController.instance.transform.position;
+                    // 设置攻击目标
+                    if (attackTarget == Vector3.zero)
+                    {
+                        attackTarget = PlayerController.instance.transform.position;
 
-                    posAfterAttck = transform.position;
-                }
+                        posAfterAttck = transform.position;
+                    }
 
-                // 攻击
-                transform.position = Vector3.MoveTowards(transform.position, attackTarget, chaseSpeed * Time.deltaTime);
+                    // 攻击
+                    transform.position = Vector3.MoveTowards(transform.position, attackTarget, chaseSpeed * Time.deltaTime);
 
-                if (Vector3.Distance(transform.position, attackTarget) <= 0.1f)
-                {
-                    attackCounter = waitAfterAttack;
-                    attackTarget = Vector3.zero;
-                }
-                else
-                {
-                    CheckSprite(attackTarget.x);
+                    if (Vector3.Distance(transform.position, attackTarget) <= 0.1f)
+                    {
+                        attackCounter = waitAfterAttack;
+                        attackTarget = Vector3.zero;
+                    }
+                    else
+                    {
+                        CheckSprite(attackTarget.x);
+                    }
                 }
             }
         }

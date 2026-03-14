@@ -15,7 +15,9 @@ public class MovingPlatform : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite On_Sprite, Off_Sprite;
 
-    // 检测玩家的组件（动态添加）
+    public float stopTime;
+    private float stopTimer;
+
     private CheckPlayer checkPlayer;
 
     // 触发器物体的初始位置（用于重置）
@@ -39,6 +41,9 @@ public class MovingPlatform : MonoBehaviour
         // 如果是触发式平台
         if (isTriggered)
         {
+            if(checkPlayer.playerExitTrigger)
+                stopTimer = stopTime;
+
             if (checkPlayer.isTrigerFromPlayer)
             {
                 spriteRenderer.sprite = On_Sprite;
@@ -46,7 +51,15 @@ public class MovingPlatform : MonoBehaviour
             }
             else
             {
-                spriteRenderer.sprite = Off_Sprite;
+                if(stopTimer > 0)
+                {
+                    platform.position = Vector3.MoveTowards(platform.position, Points[currentPointIndex].position, moveSpeed * Time.deltaTime);
+                    stopTimer -= Time.deltaTime;
+                    if (stopTimer <= 0)
+                    {
+                        spriteRenderer.sprite = Off_Sprite;
+                    }
+                }
             }
         }
         else
