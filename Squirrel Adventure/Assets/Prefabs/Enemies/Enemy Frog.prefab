@@ -203,8 +203,8 @@ GameObject:
   - component: {fileID: 1439627330756019529}
   - component: {fileID: 2651143742261697202}
   - component: {fileID: 296308474723985887}
-  - component: {fileID: 9064522388009575831}
   - component: {fileID: 1110382344889097343}
+  - component: {fileID: 9064522388009575831}
   - component: {fileID: 5347256040011690260}
   m_Layer: 0
   m_Name: Enemy Frog
@@ -279,6 +279,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1110382344889097343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340142732037659740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec9f01b472df9a429aad122e71c177f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theSR: {fileID: 8673633021648412707}
+  movespeed: 5
+  leftPoint: {fileID: 1218967141540119225}
+  rightPoint: {fileID: 5283987289222723432}
+  moveTime: 3
+  waitTime: 2
+  collectible: {fileID: 2612228832454750204, guid: e8452a3875a114341b4be0790a0c0d4f, type: 3}
+  chanceToDrop: 25
+  deathEffect: {fileID: 791458787430734051, guid: a154e79e27f36a84fa5dbefeb3df0d5e, type: 3}
 --- !u!61 &9064522388009575831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -324,27 +345,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5142212, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1110382344889097343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340142732037659740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec9f01b472df9a429aad122e71c177f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theSR: {fileID: 8673633021648412707}
-  movespeed: 5
-  leftPoint: {fileID: 1218967141540119225}
-  rightPoint: {fileID: 5283987289222723432}
-  moveTime: 3
-  waitTime: 2
-  collectible: {fileID: 2612228832454750204, guid: e8452a3875a114341b4be0790a0c0d4f, type: 3}
-  chanceToDrop: 25
-  deathEffect: {fileID: 791458787430734051, guid: a154e79e27f36a84fa5dbefeb3df0d5e, type: 3}
 --- !u!114 &5347256040011690260
 MonoBehaviour:
   m_ObjectHideFlags: 0

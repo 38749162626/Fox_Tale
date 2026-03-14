@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 2921853845234183376}
   - component: {fileID: 97256450548166988}
   - component: {fileID: 3989428957875571415}
+  - component: {fileID: 569112036421705792}
+  - component: {fileID: 9151365276090552256}
   m_Layer: 0
   m_Name: Enemy Eagle
   m_TagString: Untagged
@@ -131,11 +133,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b923725e6edfbb04e9ed4dea80647f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5927442766520159268}
   Points:
   - {fileID: 3643522450084666936}
   - {fileID: 5192525527874526611}
   moveSpeed: 5
-  spriteRenderer: {fileID: 5927442766520159268}
+  distanceToAttackPlayer: 7
+  chaseSpeed: 10
+  waitAfterAttack: 2
+  collectible: {fileID: 2612228832454750204, guid: e8452a3875a114341b4be0790a0c0d4f, type: 3}
+  chanceToDrop: 25
+  deathEffect: {fileID: 791458787430734051, guid: a154e79e27f36a84fa5dbefeb3df0d5e, type: 3}
+--- !u!58 &569112036421705792
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793016707779843347}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &9151365276090552256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793016707779843347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc017695bd5a99d4bacd01d45dae8961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damgeHealth: 1
 --- !u!1 &6913499295711147993
 GameObject:
   m_ObjectHideFlags: 0

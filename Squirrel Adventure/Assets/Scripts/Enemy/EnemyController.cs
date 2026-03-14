@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEnemyDead
 {
     private Rigidbody2D theRB;
     private Animator anim;
@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     public float movespeed;
     public Transform leftPoint, rightPoint;
 
-    //移动时间和休息时间及计时器
+    // 移动时间和休息时间及计时器
     public float moveTime, waitTime;
     private float moveCounter, waitCounter;
 
@@ -32,56 +32,29 @@ public class EnemyController : MonoBehaviour
         theRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        //解绑标记点的父物体
+        // 解绑标记点的父物体
         leftPoint.parent = null;
         rightPoint.parent = null;
 
-        //向右移动
+        // 向右移动
         movingRight = true;
 
-        //开始移动计时
+        // 开始移动计时
         moveCounter = Random.Range(moveTime * 0.75f, waitTime * 0.75f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (moveCounter > 0) 
+        if (moveCounter > 0)
         {
-            //倒计时
+            // 倒计时
             moveCounter -= Time.deltaTime;
 
-            //向右移动
-            if (movingRight)
-            {
-                //移动
-                theRB.velocity = new Vector2(movespeed, theRB.velocity.y);
+            MoveEnemy();
 
-                //反转图像
-                theSR.flipX = true;
-
-                //到右侧标记点
-                if (transform.position.x > rightPoint.position.x)
-                {
-                    movingRight = false;
-                }
-            }
-            else
-            {
-                //反方向移动
-                theRB.velocity = new Vector2(-movespeed, theRB.velocity.y);
-
-                //反转图像
-                theSR.flipX = false;
-
-                if (transform.position.x < leftPoint.position.x)
-                {
-                    movingRight = true;
-                }
-            }
-
-            //计时结束
-            if(moveCounter <= 0)
+            // 计时结束
+            if (moveCounter <= 0)
             {
                 waitCounter = Random.Range(waitTime * 0.75f, waitTime * 1.25f);
             }
@@ -90,9 +63,9 @@ public class EnemyController : MonoBehaviour
         }
         else if(waitCounter > 0)
         {
-            //倒计时
+            // 倒计时
             waitCounter -= Time.deltaTime;
-            //停止移动
+            // 停止移动
             theRB.velocity = new Vector2(0, theRB.velocity.y);
 
             if(waitCounter <= 0)
@@ -104,20 +77,57 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    //敌人死亡
-    public void EnemyDead()
+    private void MoveEnemy()
     {
-        //实例死亡特效
+        // 向右移动
+        if (movingRight)
+        {
+            // 移动
+            theRB.velocity = new Vector2(movespeed, theRB.velocity.y);
+
+            // 反转图像
+            theSR.flipX = true;
+
+            // 到右侧标记点
+            if (transform.position.x > rightPoint.position.x)
+            {
+                movingRight = false;
+            }
+        }
+        else
+        {
+            // 反方向移动
+            theRB.velocity = new Vector2(-movespeed, theRB.velocity.y);
+
+            // 反转图像
+            theSR.flipX = false;
+
+            if (transform.position.x < leftPoint.position.x)
+            {
+                movingRight = true;
+            }
+        }
+    }
+
+    // 敌人死亡
+    public void OnEnemyDead()
+    {
+        // 实例死亡特效
         Instantiate(deathEffect, transform.position, transform.rotation);
 
-        //掉落物处理
+        // 掉落物处理
         float dropSelet = Random.Range(0, 100f);
         if (dropSelet <= chanceToDrop)
         {
             Instantiate(collectible, transform.position, transform.rotation);
         }
 
-        //播放死亡音乐
+        // 播放死亡音乐
         AudioManager.instance.PlaySoundEffect(3);
+
+        // 销毁标记点和自己
+        Destroy(rightPoint.gameObject);
+        Destroy(leftPoint.gameObject);
+        Destroy(this.gameObject);
     }
 }

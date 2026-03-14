@@ -9,15 +9,24 @@ public class StompBox : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            //敌人死亡
-            other.transform.parent.GetComponent<EnemyController>().EnemyDead();
-
-            Destroy(other.transform.parent.GetComponent<EnemyController>().rightPoint.gameObject);
-            Destroy(other.transform.parent.GetComponent<EnemyController>().leftPoint.gameObject);
-            Destroy(other.transform.parent.gameObject);
+            CallOnEnemyDead(other);
 
             //角色弹跳
             PlayerController.instance.Bounce();
+        }
+    }
+
+    private void CallOnEnemyDead(Collider2D other)
+    {
+        //获取敌人脚本
+        IEnemyDead enemy = other.transform.parent.GetComponent<IEnemyDead>();
+        if (enemy != null)
+        {
+            enemy.OnEnemyDead();
+        }
+        else
+        {
+            Debug.Log("没有找到IEnemyDead脚本");
         }
     }
 }

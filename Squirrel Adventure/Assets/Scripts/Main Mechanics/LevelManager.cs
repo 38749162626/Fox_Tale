@@ -62,8 +62,6 @@ public class LevelManager : MonoBehaviour
 
         AudioManager.instance.PlaySoundEffect(8);
 
-        //待定 yield return new WaitForSeconds(waitToRespawnTime);
-
         // yield return 用于暂停协程并在指定时间后恢复
         // WaitForSeconds不会阻塞主线程，只是暂停协程的执行
         // 等待指定的重生时间
@@ -79,7 +77,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerHealthControl.instance.ResetHealth();
 
-        StartCoroutine(SetTriggerCo());
+        StartCoroutine(SetRespwanTriggerCo());
 
         //淡入场景
         FadeScreenController.instance.FadeFromBlack();
@@ -100,7 +98,7 @@ public class LevelManager : MonoBehaviour
         // 协程执行完毕，自动结束
     }
 
-    public IEnumerator SetTriggerCo()
+    public IEnumerator SetRespwanTriggerCo()
     {
         respawnTrigger = true;
         yield return new WaitForNextFrameUnit();
