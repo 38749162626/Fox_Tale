@@ -138,7 +138,7 @@ MonoBehaviour:
   - {fileID: 3643522450084666936}
   - {fileID: 5192525527874526611}
   moveSpeed: 5
-  distanceToAttackPlayer: 7
+  distanceToAttackPlayer: 10
   chaseSpeed: 10
   waitAfterAttack: 2
   collectible: {fileID: 2612228832454750204, guid: e8452a3875a114341b4be0790a0c0d4f, type: 3}

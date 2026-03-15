@@ -20,7 +20,8 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
     private bool isBack;
 
     public float waitAfterAttack;
-    private float attackCounter;
+    private float waitToAttackCounter;
+    private bool waiting;
 
     [Header("敌人掉落物相关")]
     public GameObject collectible;
@@ -41,7 +42,7 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
 
     void Update()
     {
-        if (attackCounter > 0f)
+        if (waitToAttackCounter > 0f)
         {
             if(!(Vector3.Distance(transform.position, posAfterAttck) < 0.1f) && !isBack)
             {
@@ -53,14 +54,18 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
             {
                 isBack = true;
 
+                waiting = false;
+
+                attackTarget = Vector3.zero;
+
                 MoveEnemy();
             }
-            attackCounter -= Time.deltaTime;
+            waitToAttackCounter -= Time.deltaTime;
         }
-        else
+        else if(!waiting)
         {
             // 判断是否不在攻击距离内
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) > distanceToAttackPlayer)
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) > distanceToAttackPlayer )
             {
                 attackTarget = Vector3.zero;
 
@@ -83,8 +88,7 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
 
                     if (Vector3.Distance(transform.position, attackTarget) <= 0.1f)
                     {
-                        attackCounter = waitAfterAttack;
-                        attackTarget = Vector3.zero;
+                        StartCoroutine(WaitForAttack());
                     }
                     else
                     {
@@ -126,6 +130,13 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
         }
     }
 
+    private IEnumerator WaitForAttack()
+    {
+        waiting = true;
+        yield return new WaitForSeconds(waitAfterAttack * 0.3f);
+        waitToAttackCounter = waitAfterAttack;
+    }
+
     public void OnEnemyDead()
     {
         // 实例死亡特效
@@ -147,5 +158,11 @@ public class FlyingEnemyController : MonoBehaviour, IEnemyDead
             Destroy(Points[i].gameObject);
         }
         Destroy(this.gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, distanceToAttackPlayer);
     }
 }

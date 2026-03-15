@@ -177,6 +177,8 @@ public class PlayerController : MonoBehaviour
             HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
     }
 
+    #region 弹跳函数
+
     public void Bounce()
     {
         //给玩家增加向上的力
@@ -189,6 +191,20 @@ public class PlayerController : MonoBehaviour
 
         AudioManager.instance.PlaySoundEffect(10);
     }
+    public void Bounce(float bounceForce)
+    {
+        //给玩家增加向上的力
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, bounceForce);
+
+        canDoubleJump = true;
+
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
+
+        AudioManager.instance.PlaySoundEffect(10);
+    }
+
+    #endregion
 
     #region 玩家特效相关
 
@@ -220,6 +236,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region 平台检测相关
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
@@ -235,4 +253,6 @@ public class PlayerController : MonoBehaviour
             transform.parent = parent;
         }
     }
+
+    #endregion
 }

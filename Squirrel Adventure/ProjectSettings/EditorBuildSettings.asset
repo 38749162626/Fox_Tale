@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sences/Level_1-5.unity
     guid: 3bc33ae1efc7cc04184bb3e8699593f8
+  - enabled: 1
+    path: Assets/Sences/Level_1-6.unity
+    guid: ef3013cf864755d469cb82d63bc29a61
   m_configObjects: {}

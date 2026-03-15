@@ -22408,7 +22408,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: isLocked
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelToLoad
+      value: Level_1-6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelToCheck
+      value: Level_1-5
       objectReference: {fileID: 0}
     - target: {fileID: 2177095502650137850, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: m_LocalPosition.x

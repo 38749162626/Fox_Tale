@@ -115,6 +115,7 @@ MonoBehaviour:
   offsetAmount_Far: {x: 0.9, y: 1}
   offsetAmount_Mid: {x: 0.6, y: 0.5}
   amountToMove: {x: 0, y: 0}
+  gizmoLength: 1000
 --- !u!114 &3548156029503393626
 MonoBehaviour:
   m_ObjectHideFlags: 0
