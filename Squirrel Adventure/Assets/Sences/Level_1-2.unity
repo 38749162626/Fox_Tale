@@ -789,6 +789,50 @@ PrefabInstance:
       propertyPath: minHeight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[0].max.x
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[0].max.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].max.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].max.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].min.x
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].min.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].max.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].max.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].min.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].min.y
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 1389931207860564442, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

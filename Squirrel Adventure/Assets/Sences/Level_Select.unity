@@ -22411,6 +22411,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: levelName
+      value: Pull The Crank!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: totalGems
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
+      propertyPath: targetTime
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179726588873915616, guid: 2931b0543ad9a6a4692dbd006eb9a6db, type: 3}
       propertyPath: levelToLoad
       value: Level_1-6
       objectReference: {fileID: 0}

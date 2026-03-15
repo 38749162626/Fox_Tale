@@ -9637,6 +9637,98 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[0].max.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[0].min.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].max.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].max.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].min.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[1].min.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].max.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].max.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].min.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[2].min.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[3].max.x
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[3].max.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[3].min.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[3].min.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[4].max.x
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[4].max.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[4].min.x
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[4].min.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[5].max.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[5].max.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[5].min.x
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 967910105239609007, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
+      propertyPath: cameraBounds.Array.data[5].min.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 1389931207860564442, guid: a1ec57555c9fd5b48998ff5d5df70a1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

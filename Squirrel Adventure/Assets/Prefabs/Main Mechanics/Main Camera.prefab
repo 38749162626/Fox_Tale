@@ -107,15 +107,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  minHeight: 1
-  maxHeight: 4
   stopFollow: 0
+  cameraBounds:
+  - min: {x: -50, y: -5}
+    max: {x: 150, y: 8}
   farBackground: {fileID: 0}
   middleBackground: {fileID: 0}
   offsetAmount_Far: {x: 0.9, y: 1}
   offsetAmount_Mid: {x: 0.6, y: 0.5}
-  amountToMove: {x: 0, y: 0}
-  gizmoLength: 1000
+  smoothTime: 0.2
 --- !u!114 &3548156029503393626
 MonoBehaviour:
   m_ObjectHideFlags: 0
