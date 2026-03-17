@@ -9,10 +9,7 @@ public class KillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
-
-            LevelManager.instance.RespawnPlayer();
+            PlayerHealthControl.instance.KillPlayer();
         }
     }
 }

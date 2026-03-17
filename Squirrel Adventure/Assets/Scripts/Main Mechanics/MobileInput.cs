@@ -35,7 +35,7 @@ public class MobileInput : MonoBehaviour
     private IEnumerator JumpPress()
     {
         isJumpPressed = true;
-        yield return new WaitForNextFrameUnit();
+        yield return null;
         isJumpPressed = false;
     }
 }

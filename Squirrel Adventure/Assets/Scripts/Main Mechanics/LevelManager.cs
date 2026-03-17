@@ -55,10 +55,7 @@ public class LevelManager : MonoBehaviour
     // 协程使用 IEnumerator 返回类型，允许使用 yield 关键字暂停执行
     private IEnumerator RespawnCo()
     {
-        stopTiming = true;
-
-        // 将玩家游戏对象设置为非激活状态
-        PlayerController.instance.gameObject.SetActive(false);
+        PlayerController.instance.DisactivePlayer();
 
         AudioManager.instance.PlaySoundEffect(8);
 
@@ -90,18 +87,14 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
-        // 重新激活玩家游戏对象
-        PlayerController.instance.gameObject.SetActive(true);
-
-        stopTiming = false;
-
+        PlayerController.instance.ActivePlayer();
         // 协程执行完毕，自动结束
     }
 
     public IEnumerator SetRespwanTriggerCo()
     {
         respawnTrigger = true;
-        yield return new WaitForNextFrameUnit();
+        yield return null;
         respawnTrigger = false;
     }
 

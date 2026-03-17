@@ -14,7 +14,7 @@ public class CheckPlayer : MonoBehaviour
         {
             isTrigerFromPlayer = true;
 
-            StartCoroutine(CollisionEnter2D());
+            StartCoroutine(PlayerEnterTriggerCo());
         }
     }
 
@@ -24,21 +24,21 @@ public class CheckPlayer : MonoBehaviour
         {
             isTrigerFromPlayer = false;
 
-            StartCoroutine(CollisionExit2D());
+            StartCoroutine(PlayerExitTriggerCo());
         }
     }
 
-    private IEnumerator CollisionEnter2D()
+    internal IEnumerator PlayerEnterTriggerCo()
     {
         playerEnterTrigger = true;
-        yield return new WaitForNextFrameUnit();
+        yield return null;
         playerEnterTrigger = false;
     }
 
-    private IEnumerator CollisionExit2D()
+    internal IEnumerator PlayerExitTriggerCo()
     {
         playerExitTrigger = true;
-        yield return new WaitForNextFrameUnit();
+        yield return null;
         playerExitTrigger = false;
     }
 }

@@ -25,7 +25,7 @@ public class CheckpointController : MonoBehaviour
         checkpoints = FindObjectsOfType<Checkpoint>();
 
         //初始化重生点为玩家出生点
-        spawnPoint = PlayerController.instance.transform.position;
+        SetSpawnPoint(PlayerController.instance.transform.position);
     }
 
     //控制关闭所有检查点的函数

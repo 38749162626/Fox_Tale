@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
         Invoke("ActivePlayer", 0.8f);
     }
 
-    private void DisactivePlayer()
+    public void DisactivePlayer()
     {
         LevelManager.instance.stopTiming = true;
 

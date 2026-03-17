@@ -66,16 +66,7 @@ public class PlayerHealthControl : MonoBehaviour
             // ¼ì²éÍæ¼ÒÊÇ·ñËÀÍö
             if (currentHealth <= 0)
             {
-                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
-
-                currentHealth = 0;
-
-                anim.SetTrigger("Die");
-
-                Instantiate(PlayerController.instance.Disappear_Effect, transform.position, transform.rotation);
-
-                LevelManager.instance.RespawnPlayer();
+                KillPlayer();
             }
             else
             {
@@ -95,6 +86,20 @@ public class PlayerHealthControl : MonoBehaviour
 
             UIController.instance.UpdataHealthDisplay();
         }
+    }
+
+    public void KillPlayer()
+    {
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+
+        currentHealth = 0;
+
+        anim.SetTrigger("Die");
+
+        Instantiate(PlayerController.instance.Disappear_Effect, transform.position, transform.rotation);
+
+        LevelManager.instance.RespawnPlayer();
     }
 
     #endregion
