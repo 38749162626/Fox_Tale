@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ButtonDefault : MonoBehaviour
 {
-    private bool isMouseOver = false;
-
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        if (Gamepad.current != null)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
-        GetComponent<Button>().Select();
+            GetComponent<Button>().Select();
+        }
     }
 
     void Update()
@@ -23,17 +25,12 @@ public class ButtonDefault : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            isMouseOver = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse1))
+        else if (Gamepad.current != null && Input.GetKeyDown(KeyCode.Mouse1))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            isMouseOver = false;
-        }
 
-        if (!isMouseOver && EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
-        {
             GetComponent<Button>().Select();
         }
     }

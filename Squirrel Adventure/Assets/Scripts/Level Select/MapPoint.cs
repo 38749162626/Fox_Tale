@@ -18,6 +18,7 @@ public class MapPoint : MonoBehaviour
     public bool isLocked;
     // 需要检查的关卡名称（用于判断是否解锁）
     public string levelToLoad, levelToCheck, levelName;
+    public bool hasComplete;
 
     [Header("宝石,时间")]
     public int gemsCollected;
@@ -73,13 +74,14 @@ public class MapPoint : MonoBehaviour
             }
         }
 
-        if (isLevel && isLocked)
-        {
-            locked.SetActive(true);
-        }
+        if(isLevel && bestTime == 0)
+            hasComplete = false;
         else
-        {
+            hasComplete = true;
+
+        if (isLevel && isLocked)
+            locked.SetActive(true);
+        else
             locked.SetActive(false);
-        }
     }
 }

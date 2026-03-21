@@ -1,5 +1,7 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
+using Terresquall;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,7 +10,7 @@ public class Smasher : MonoBehaviour
     public float SmashSpeed, UpSpeed;
     public GameObject Trigger;
 
-    private CheckPlayerTrigger checkPlayerTrigger;
+    private CheckPlayer checkPlayer;
     private Vector3 startPos;
     private bool isUping;
 
@@ -18,13 +20,13 @@ public class Smasher : MonoBehaviour
 
         Trigger.transform.parent = null;
 
-        checkPlayerTrigger = Trigger.GetComponent<CheckPlayerTrigger>();
+        checkPlayer = Trigger.GetComponent<CheckPlayer>();
     }
 
     
     void Update()
     {
-        if (checkPlayerTrigger.playerEnterTrigger && !isUping)
+        if (checkPlayer.playerEnterTrigger && !isUping)
         {
             StartCoroutine(SmasherCo());
         }
@@ -37,6 +39,8 @@ public class Smasher : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, Trigger.transform.position, SmashSpeed * Time.deltaTime);
             yield return null;
         }
+        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
         yield return new WaitForSeconds(1);
         isUping = true;
         while (Vector3.Distance(transform.position, startPos) > 0.05f)

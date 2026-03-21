@@ -1,3 +1,4 @@
+using Lofelt.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,9 @@ public class Switch : MonoBehaviour
 
             spriteRenderer.sprite = downSprite;
             hasSwitch = true;
+
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
         }
     }
 }

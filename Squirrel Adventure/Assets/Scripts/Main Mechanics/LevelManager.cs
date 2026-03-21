@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     [Header("拾取物和时间")]
     public int gemsCollected;
     public float timeInLevel;
+    private float lastTimeInLevel;
 
     void Awake()
     {
@@ -32,6 +33,8 @@ public class LevelManager : MonoBehaviour
     {
         timeInLevel = 0;
         stopTiming = false;
+
+        lastTimeInLevel = timeInLevel;
     }
 
     void Update()
@@ -183,7 +186,6 @@ public class LevelManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
         }
-
 
         //加载下个场景
         SceneManager.LoadScene(levelToLoad);
