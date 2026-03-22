@@ -10,10 +10,13 @@ public class UserData
 {
     public string UserName;
     public int score;
-    public UserData(string UserName, int score)
+    public string date;
+
+    public UserData(string UserName, int score, string date)
     {
         this.UserName = UserName;
         this.score = score;
+        this.date = date;
     }
 }
 
@@ -59,12 +62,12 @@ public class LeaderBoardManager : MonoBehaviour
             {
                 foreach (JsonData user in userDatas)
                 {
-                    userDataList.Add(new UserData(user["name"].ToString(), int.Parse('-' + user["score"].ToString())));
+                    userDataList.Add(new UserData(user["name"].ToString(), int.Parse('-' + user["score"].ToString()), user["date"].ToString()));
                 }
             }
             else if(userDatas != null)
             {
-                userDataList.Add(new UserData(userDatas["name"].ToString(), int.Parse('-' + userDatas["score"].ToString())));
+                userDataList.Add(new UserData(userDatas["name"].ToString(), int.Parse('-' + userDatas["score"].ToString()), userDatas["date"].ToString()));
             }
             callBack(userDataList);
         }

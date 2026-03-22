@@ -5,31 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Main_Menu.unity
     guid: 06eea3cb29f02a241a9b45ed308b4f1d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_Select.unity
     guid: 88dbd5b41b6a30341bf8fcc9764eb3db
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-1.unity
     guid: b72361c4a043a8648b712c371f6844c5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-2.unity
     guid: 20abb291ad3ae0345b3e41d9ea1c30e0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-3.unity
     guid: 3c891739e91c1b940ba4b95a586b1a50
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-4.unity
     guid: 7e43f7b34cc69d9418875d03516e2d9a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-5.unity
     guid: 3bc33ae1efc7cc04184bb3e8699593f8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sences/Level_1-6.unity
     guid: ef3013cf864755d469cb82d63bc29a61
-  - enabled: 1
-    path: Assets/Sences/LeaderBoardTest.unity
-    guid: d7ebbb059d3e49b4aaf0bda7a0ef24b9
   m_configObjects: {}
