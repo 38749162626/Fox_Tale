@@ -23,4 +23,9 @@ public class FirstRunChecker : MonoBehaviour
             Debug.Log("非首次运行，保留现有数据");
         }
     }
+
+    void Start()
+    {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+    }
 }
