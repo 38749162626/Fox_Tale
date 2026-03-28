@@ -7,7 +7,6 @@ public class ScoreCell : MonoBehaviour
 {
     public Text userNameText, scoreText, NoText, dateText;
 
-
     public void SetData(UserData data)
     {
         userNameText.text = data.UserName;

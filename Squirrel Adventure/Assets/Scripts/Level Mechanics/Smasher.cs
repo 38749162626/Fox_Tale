@@ -34,6 +34,8 @@ public class Smasher : MonoBehaviour
 
     private IEnumerator SmasherCo()
     {
+        AudioManager.instance.PlaySoundEffect(3);
+
         while (Vector3.Distance(transform.position, Trigger.transform.position) > 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, Trigger.transform.position, SmashSpeed * Time.deltaTime);

@@ -23,9 +23,6 @@ public class LeaderBoardView : MonoBehaviour
         {
             StartCoroutine(LeaderBoardManager.GetHighScoreList(GetHightScoreCallBack));
             hasActive = true;
-        }else if (!gameObject.activeSelf)
-        {
-            hasActive = false;
         }
     }
 }

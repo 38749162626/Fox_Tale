@@ -44,7 +44,7 @@ public class LSManager : MonoBehaviour
         }
 
         if (doesLevelComplete)
-            StartCoroutine(LeaderBoardManager.CreateNewHightScore(PlayerPrefs.GetString("PlayerName"), (int)(sumTime * 1000)));
+            StartCoroutine(LeaderBoardManager.CreateNewHightScore(PlayerPrefs.GetString("PlayerName"), (int)(sumTime * -1000)));
     }
 
     public void LoadLevel()

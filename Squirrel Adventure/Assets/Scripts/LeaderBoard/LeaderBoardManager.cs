@@ -26,11 +26,6 @@ public class LeaderBoardManager : MonoBehaviour
     private const string privateCode = "kgCvXpFzLk6n41EaZQBReQ1BV0Bd-3BUKLoY8Iywo5XQ";
     private const string publicCode = "69bbe1698f40bb2f60a68c10";
 
-    private void Start()
-    {
-
-    }
-
     public static IEnumerator CreateNewHightScore(string userName, float score)
     {
         UnityWebRequest request = new UnityWebRequest(url + privateCode + "/add/" + UnityWebRequest.EscapeURL(userName) + "/" + score);
@@ -62,12 +57,12 @@ public class LeaderBoardManager : MonoBehaviour
             {
                 foreach (JsonData user in userDatas)
                 {
-                    userDataList.Add(new UserData(user["name"].ToString(), int.Parse('-' + user["score"].ToString()), user["date"].ToString()));
+                    userDataList.Add(new UserData(user["name"].ToString(), int.Parse(user["score"].ToString()), user["date"].ToString()));
                 }
             }
             else if(userDatas != null)
             {
-                userDataList.Add(new UserData(userDatas["name"].ToString(), int.Parse('-' + userDatas["score"].ToString()), userDatas["date"].ToString()));
+                userDataList.Add(new UserData(userDatas["name"].ToString(), int.Parse(userDatas["score"].ToString()), userDatas["date"].ToString()));
             }
             callBack(userDataList);
         }

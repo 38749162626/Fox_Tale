@@ -18,7 +18,7 @@ public class ActiveDeactiveButton : MonoBehaviour
         }
     }
 
-    public void OnButtonClick()
+    public virtual void OnButtonClick()
     {
         foreach (GameObject gameObject in gameObjects)
         {

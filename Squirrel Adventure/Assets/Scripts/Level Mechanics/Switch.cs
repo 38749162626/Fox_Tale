@@ -19,16 +19,12 @@ public class Switch : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player" && !hasSwitch)
         {
+            AudioManager.instance.PlaySoundEffect(3);
+
             if (deactivateOnSwitch)
             {
                 ObjectToSwitch.SetActive(false);
