@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 1813767457141197894}
   - component: {fileID: 5704579004119612403}
   - component: {fileID: 3054238772951326499}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: StompBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

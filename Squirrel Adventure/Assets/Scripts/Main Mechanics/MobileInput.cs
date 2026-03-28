@@ -22,11 +22,6 @@ public class MobileInput : MonoBehaviour
             gameObject.SetActive(false);
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnJumpClick()
     {
         StartCoroutine(JumpPress());

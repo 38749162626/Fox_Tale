@@ -12,6 +12,7 @@ public class Clickable : MonoBehaviour
     //是否为曲柄类型
     //曲柄类型具有特殊的灯光和房屋精灵控制逻辑
     public bool isCrank;
+    public bool isNight;
 
     [Header("物体图片和SpriteRenederer和物体的光照")]
     private SpriteRenderer theSR;
@@ -49,12 +50,31 @@ public class Clickable : MonoBehaviour
         theSR.sprite = Default;
 
         MainMenuAudioManager.instance.PlayNightMusic(false);
+
+        if (isNight)
+        {
+            // 切换到点击状态：更新精灵、激活灯光
+            theSR.sprite = OnClick;
+
+            Light2D.SetActive(true);
+
+            if (isCrank)
+            {
+                // 曲柄类型的特殊处理：更新房屋精灵和全局灯光颜色
+                house_SR.sprite = house_0n;
+                globalLight2D.GetComponent<Light2D>().color = new Color(0.1f, 0.1f, 0.1f, 1f);
+
+                MainMenuAudioManager.instance.PlayNightMusic(true);
+            }
+        }
     }
 
     private void OnMouseDown()
     {
-        if(theSR.sprite == Default)
+        if(!isNight)
         {
+            isNight = true;
+
             // 切换到点击状态：更新精灵、激活灯光
             theSR.sprite = OnClick;
 
@@ -71,6 +91,8 @@ public class Clickable : MonoBehaviour
         }
         else
         {
+            isNight = false;
+
             // 切换回默认状态：恢复精灵、关闭灯光
             theSR.sprite = Default;
 
