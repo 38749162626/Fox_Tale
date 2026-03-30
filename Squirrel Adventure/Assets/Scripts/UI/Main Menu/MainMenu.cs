@@ -17,6 +17,9 @@ public class MainMenu : MonoBehaviour
     [Header("场景名称")]
     public string startScene;
     public string continueScene;
+    [Header("加载")]
+    public GameObject LoadingCanvas;
+    public Slider slider;
 
     void Start()
     {
@@ -37,6 +40,8 @@ public class MainMenu : MonoBehaviour
             secondButtons.SetActive(false);
             WellcomePannel.SetActive(false);
         }
+
+        LoadingCanvas.SetActive(false);
     }
 
     public void StartGame()
@@ -71,14 +76,21 @@ public class MainMenu : MonoBehaviour
 
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
-        SceneManager.LoadScene(startScene);
-
         PlayerPrefs.DeleteAll();
 
         // 等于FirstRunChecker.cs的FIRST_RUN_KEY
         PlayerPrefs.SetInt("FirstRunComplete_v1", 1);
         PlayerPrefs.SetString("PlayerName", userName.text);
         PlayerPrefs.Save();
+
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(startScene);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
     }
 
     public void ContinueGame()
@@ -92,7 +104,14 @@ public class MainMenu : MonoBehaviour
 
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
-        SceneManager.LoadScene(continueScene);
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(startScene);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
     }
 
     public void QuitGame()

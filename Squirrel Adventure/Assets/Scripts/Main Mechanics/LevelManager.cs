@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class LevelManager : MonoBehaviour
     public int gemsCollected;
     public float timeInLevel;
     private float lastTimeInLevel;
+
+    [Header("加载")]
+    public GameObject LoadingCanvas;
+    public Slider slider;
 
     void Awake()
     {
@@ -188,7 +193,14 @@ public class LevelManager : MonoBehaviour
         }
 
         //加载下个场景
-        SceneManager.LoadScene(levelToLoad);
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelToLoad);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
     }
 
     #endregion

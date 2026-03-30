@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LSManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class LSManager : MonoBehaviour
 
     private float sumTime;
     private bool doesLevelComplete = true;
+
+    [Header("加载")]
+    public GameObject LoadingCanvas;
+    public Slider slider;
 
     void Start()
     {
@@ -63,6 +68,14 @@ public class LSManager : MonoBehaviour
 
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
-        SceneManager.LoadScene(thePlayer.currentPoint.levelToLoad);
+        //加载下个场景
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(thePlayer.currentPoint.levelToLoad);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
     }
 }
