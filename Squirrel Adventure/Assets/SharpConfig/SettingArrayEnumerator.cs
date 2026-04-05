@@ -1,0 +1,217 @@
+// Copyright (c) 2013-2026 Cem Dervis, MIT License.
+// https://sharpconfig.org
+
+namespace SharpConfig
+{
+  // Enumerates the elements of a Setting that represents an array.
+  internal sealed class SettingArrayEnumerator
+  {
+    private readonly string _stringValue;
+    private readonly bool _shouldCalcElemString;
+    private int _idxInString;
+    private readonly int _lastRBraceIdx;
+    private int _prevElemIdxInString;
+    private int _braceBalance;
+    private bool _isInQuotes;
+    private bool _isDone;
+
+    public SettingArrayEnumerator(string value, bool shouldCalcElemString)
+    {
+      _stringValue = value;
+      _idxInString = -1;
+      _lastRBraceIdx = -1;
+      _shouldCalcElemString = shouldCalcElemString;
+      IsValid = true;
+      _isDone = false;
+
+      for (int i = 0; i < value.Length; ++i)
+      {
+        var ch = value[i];
+
+        if (ch != ' ' && ch != '{')
+        {
+          break;
+        }
+
+        if (ch != '{')
+        {
+          continue;
+        }
+
+        _idxInString = i + 1;
+        _braceBalance = 1;
+        _prevElemIdxInString = i + 1;
+
+        break;
+      }
+
+      // Abort if no valid '{' occurred.
+      if (_idxInString < 0)
+      {
+        IsValid = false;
+        _isDone = true;
+        return;
+      }
+
+      // See where the last valid '}' is.
+      for (var i = value.Length - 1; i >= 0; --i)
+      {
+        var ch = value[i];
+
+        if (ch != ' ' && ch != '}')
+        {
+          break;
+        }
+
+        if (ch != '}')
+        {
+          continue;
+        }
+
+        _lastRBraceIdx = i;
+
+        break;
+      }
+
+      // Abort if no valid '}' occurred.
+      if (_lastRBraceIdx < 0)
+      {
+        IsValid = false;
+        _isDone = true;
+        return;
+      }
+
+      // See if this is an empty array such as "{    }" or "{}".
+      // If so, this is a valid array, but with size 0.
+      if (_idxInString == _lastRBraceIdx || !IsNonEmptyValue(_stringValue, _idxInString, _lastRBraceIdx))
+      {
+        IsValid = true;
+        _isDone = true;
+        return;
+      }
+    }
+
+    private void UpdateElementString(int idx)
+    {
+      Current = _stringValue.Substring(_prevElemIdxInString, idx - _prevElemIdxInString);
+
+      // Trim spaces first.
+      Current = Current.Trim(' ');
+
+      // Now trim the quotes, but only the first and last, because
+      // the setting value itself can contain quotes.
+      if (Current[Current.Length - 1] == '\"')
+      {
+        Current = Current.Remove(Current.Length - 1, 1);
+      }
+
+      if (Current[0] == '\"')
+      {
+        Current = Current.Remove(0, 1);
+      }
+    }
+
+    public bool Next()
+    {
+      if (_isDone)
+      {
+        return false;
+      }
+
+      var idx = _idxInString;
+
+      while (idx <= _lastRBraceIdx)
+      {
+        var ch = _stringValue[idx];
+
+        if (ch == '{' && !_isInQuotes)
+        {
+          ++_braceBalance;
+        }
+        else if (ch == '}' && !_isInQuotes)
+        {
+          --_braceBalance;
+
+          if (idx == _lastRBraceIdx)
+          {
+            // This is the last element.
+            if (!IsNonEmptyValue(_stringValue, _prevElemIdxInString, idx))
+            {
+              // Empty array element; invalid array.
+              IsValid = false;
+            }
+            else if (_shouldCalcElemString)
+            {
+              UpdateElementString(idx);
+            }
+
+            _isDone = true;
+
+            break;
+          }
+        }
+        else if (ch == '\"')
+        {
+          var nextQuoteMarkIndex = _stringValue.IndexOf('\"', idx + 1);
+
+          if (nextQuoteMarkIndex > 0 && _stringValue[nextQuoteMarkIndex - 1] != '\\')
+          {
+            idx = nextQuoteMarkIndex;
+            _isInQuotes = false;
+          }
+          else
+          {
+            _isInQuotes = true;
+          }
+        }
+        else if (ch == Configuration.ArrayElementSeparator && _braceBalance == 1 && !_isInQuotes)
+        {
+          if (!IsNonEmptyValue(_stringValue, _prevElemIdxInString, idx))
+          {
+            // Empty value in-between commas; this is an invalid array.
+            IsValid = false;
+          }
+          else if (_shouldCalcElemString)
+          {
+            UpdateElementString(idx);
+          }
+
+          _prevElemIdxInString = idx + 1;
+
+          // Yield.
+          ++idx;
+
+          break;
+        }
+
+        ++idx;
+      }
+
+      _idxInString = idx;
+
+      if (_isInQuotes)
+      {
+        IsValid = false;
+      }
+
+      return IsValid;
+    }
+
+    private static bool IsNonEmptyValue(string s, int begin, int end)
+    {
+      for (; begin < end; ++begin)
+      {
+        if (s[begin] != ' ')
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public string? Current { get; private set; }
+
+    public bool IsValid { get; private set; }
+  }
+}

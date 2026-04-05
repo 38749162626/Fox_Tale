@@ -1094,6 +1094,7 @@ GameObject:
   - component: {fileID: 7007703564264150488}
   - component: {fileID: 9151394090760684083}
   - component: {fileID: 1742790085552832081}
+  - component: {fileID: 343364477364583096}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -1225,6 +1226,21 @@ MonoBehaviour:
   pausedTimer: 0
   mainMenu: Main_Menu
   levelSelect: Level_Select
+  LoadingCanvas: {fileID: 2568454202562078098}
+  slider: {fileID: 6596387553978318574}
+--- !u!114 &343364477364583096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348284830848259222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444f0ed2ef764214bbea2fec756d4b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPSPannel: {fileID: 61883172127666520}
 --- !u!1 &3467968236895914397
 GameObject:
   m_ObjectHideFlags: 0

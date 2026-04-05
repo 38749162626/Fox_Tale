@@ -15,10 +15,11 @@ public class FadeInAndOut_UI : MonoBehaviour
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();      // 安全退出
         if (isFadingOut) yield break;
-        isFadingIn = true;
 
         gameObject.SetActive(true);
-        if (fadeTime <= 0) yield break;
+        if (fadeTime <= 0) yield break; 
+
+        isFadingIn = true;
 
         canvasGroup.alpha = 0f;
         yield return new WaitForSeconds(delayBeforeFading);
@@ -37,9 +38,16 @@ public class FadeInAndOut_UI : MonoBehaviour
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
         if (isFadingIn) yield break;
-        isFadingOut = true;
 
-        if (fadeTime <= 0) yield break;
+        if (fadeTime <= 0)
+        {
+            yield break;
+            gameObject.SetActive(false);
+            // 注意：对象禁用后，alpha 重置没有意义，但保留无妨
+            canvasGroup.alpha = 1f;
+        }
+
+        isFadingOut = true;
 
         yield return new WaitForSeconds(delayBeforeFading);
 

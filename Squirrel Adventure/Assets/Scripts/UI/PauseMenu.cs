@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PauseMenu : MonoBehaviour
     public string mainMenu;
     [Tooltip("选择关卡场景")]
     public string levelSelect;
+    public GameObject LoadingCanvas;
+    public Slider slider;
 
     void Awake()
     {
@@ -86,7 +89,16 @@ public class PauseMenu : MonoBehaviour
 
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
-        SceneManager.LoadScene(levelSelect);
+        //加载下个场景
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelSelect);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
+
         Time.timeScale = 1f;
     }
 
@@ -102,7 +114,16 @@ public class PauseMenu : MonoBehaviour
 
         yield return new WaitForSeconds((1f / FadeScreenController.instance.fadeSpeed) + .25f);
 
-        SceneManager.LoadScene(mainMenu);
+        //加载下个场景
+        LoadingCanvas.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(mainMenu);
+        while (!operation.isDone)
+        {
+            slider.value = operation.progress;
+            yield return null;
+        }
+
         Time.timeScale = 1f;
     }
 }

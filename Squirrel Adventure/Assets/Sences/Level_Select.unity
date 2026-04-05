@@ -19917,6 +19917,7 @@ GameObject:
   - component: {fileID: 936716454}
   - component: {fileID: 936716453}
   - component: {fileID: 936716457}
+  - component: {fileID: 936716458}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -20026,6 +20027,19 @@ MonoBehaviour:
   gemsTarget: {fileID: 448486938}
   bestTime: {fileID: 1908079192}
   targetTime: {fileID: 571801631}
+--- !u!114 &936716458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936716452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444f0ed2ef764214bbea2fec756d4b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPSPannel: {fileID: 1901373278}
 --- !u!114 &943111892 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9028206996657071414, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}

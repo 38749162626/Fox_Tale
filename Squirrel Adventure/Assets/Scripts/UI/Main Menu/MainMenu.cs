@@ -106,7 +106,7 @@ public class MainMenu : MonoBehaviour
 
         LoadingCanvas.SetActive(true);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(startScene);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(continueScene);
         while (!operation.isDone)
         {
             slider.value = operation.progress;
