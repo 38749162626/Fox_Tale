@@ -41,8 +41,9 @@ public class Smasher : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, Trigger.transform.position, SmashSpeed * Time.deltaTime);
             yield return null;
         }
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
         yield return new WaitForSeconds(1);
         isUping = true;
         while (Vector3.Distance(transform.position, startPos) > 0.05f)

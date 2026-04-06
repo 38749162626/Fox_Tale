@@ -90,8 +90,9 @@ public class PlayerHealthControl : MonoBehaviour
 
     public void KillPlayer()
     {
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
 
         currentHealth = 0;
 

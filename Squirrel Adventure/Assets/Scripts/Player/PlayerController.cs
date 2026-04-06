@@ -173,8 +173,9 @@ public class PlayerController : MonoBehaviour
         //给玩家增加击退力
         rigidbody.velocity = new Vector2(0f, knockBackForce * 2);
 
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
     }
 
     #region 弹跳函数
@@ -186,8 +187,9 @@ public class PlayerController : MonoBehaviour
 
         canDoubleJump = true;
 
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
 
         AudioManager.instance.PlaySoundEffect(10);
     }
@@ -198,8 +200,9 @@ public class PlayerController : MonoBehaviour
 
         canDoubleJump = true;
 
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
 
         AudioManager.instance.PlaySoundEffect(10);
     }

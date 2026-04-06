@@ -59,8 +59,9 @@ public class LSManager : MonoBehaviour
 
     public IEnumerator LoadLevelCo()
     {
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.Selection);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.Selection);
 
         AudioManager.instance.PlaySoundEffect(0);
 

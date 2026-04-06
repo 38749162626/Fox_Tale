@@ -99,8 +99,9 @@ public class LSPlayer : MonoBehaviour
 
                 anim.SetTrigger("Quiver");
 
-                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
+                if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+                    if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
             }
         }
     }

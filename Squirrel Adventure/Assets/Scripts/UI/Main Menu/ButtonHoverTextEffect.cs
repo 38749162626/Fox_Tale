@@ -6,47 +6,64 @@ using UnityEngine.EventSystems;
 public class ButtonHoverTextEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("效果颜色")]
-    [Tooltip("鼠标悬停时的文字颜色")]
     public Color hoverColor = Color.red;
+    public bool useText = true;   // true: 加尖括号，false: 仅变色
 
-    private Text buttonText;          // 按钮上的 Text 组件
-    private string originalText;      // 原始文本内容
+    private Text[] buttonTexts;     // 按钮下的所有 Text 组件（数组）
+    private string[] originalTexts; // 对应的原始文本数组
 
     void Start()
     {
-        // 获取按钮上的 Text 组件（假设 Text 是 Button 的子物体）
-        buttonText = GetComponentInChildren<Text>();
-        if (buttonText == null)
+        // 获取所有子物体中的 Text 组件
+        buttonTexts = GetComponentsInChildren<Text>();
+        if (buttonTexts == null || buttonTexts.Length == 0)
         {
             Debug.LogError("Button 下没有找到 Text 组件！");
             return;
         }
 
-        // 开启富文本支持（必须）
-        buttonText.supportRichText = true;
+        // 初始化原始文本数组
+        originalTexts = new string[buttonTexts.Length];
 
-        // 记录原始文本
-        originalText = buttonText.text;
+        for (int i = 0; i < buttonTexts.Length; i++)
+        {
+            // 开启富文本支持
+            buttonTexts[i].supportRichText = true;
+            // 记录原始文本
+            originalTexts[i] = buttonTexts[i].text;
+        }
     }
 
-    // 鼠标进入时触发
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (buttonText == null) return;
+        if (buttonTexts == null) return;
 
-        // 使用 <color> 标签包裹，并在两侧加上 < > 符号
-        string coloredText = $"<color={ColorToHex(hoverColor)}><  {originalText}  ></color>";
-        buttonText.text = coloredText;
+        for (int i = 0; i < buttonTexts.Length; i++)
+        {
+            string coloredText;
+            if (useText)
+            {
+                // 加尖括号并变色
+                coloredText = $"<color={ColorToHex(hoverColor)}><  {originalTexts[i]}  ></color>";
+            }
+            else
+            {
+                // 仅变色，不加尖括号
+                coloredText = $"<color={ColorToHex(hoverColor)}>{originalTexts[i]}</color>";
+            }
+            buttonTexts[i].text = coloredText;
+        }
     }
 
-    // 鼠标离开时触发
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (buttonText == null) return;
-        buttonText.text = originalText;
+        if (buttonTexts == null) return;
+        for (int i = 0; i < buttonTexts.Length; i++)
+        {
+            buttonTexts[i].text = originalTexts[i];
+        }
     }
 
-    // 辅助方法：将 Color 转为十六进制字符串（如 #FF0000）
     private string ColorToHex(Color color)
     {
         return $"#{Mathf.RoundToInt(color.r * 255):X2}" +
@@ -56,6 +73,12 @@ public class ButtonHoverTextEffect : MonoBehaviour, IPointerEnterHandler, IPoint
 
     void OnDisable()
     {
-        buttonText.text = originalText;
+        // 组件禁用时恢复原始文本
+        if (buttonTexts == null) return;
+        for (int i = 0; i < buttonTexts.Length; i++)
+        {
+            if (buttonTexts[i] != null)
+                buttonTexts[i].text = originalTexts[i];
+        }
     }
 }

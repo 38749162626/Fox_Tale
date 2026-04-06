@@ -1659,8 +1659,8 @@ Transform:
   - {fileID: 2784416618189714273}
   - {fileID: 1773167828978387955}
   - {fileID: 6746276971827295291}
-  - {fileID: 2676705492873442013}
   - {fileID: 3693108062433139202}
+  - {fileID: 2676705492873442013}
   - {fileID: 1056813168642386440}
   - {fileID: 3062817361427199766}
   - {fileID: 7089969844496785637}
@@ -2326,10 +2326,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loading Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 388798945646476874, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1494564146766996343, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2409,14 +2405,6 @@ PrefabInstance:
     - target: {fileID: 1494564146766996343, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2268677159040992356, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8020918996304017550, guid: a83a0bf1d959b134c8e00173ecf9ca1c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

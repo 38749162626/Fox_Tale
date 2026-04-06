@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
         pausedPannel.SetActive(false);
     }
 
-    
+
     void Update()
     {
         //按下ESC或Xbox手柄的Menu键

@@ -24,8 +24,9 @@ public class Pickup : MonoBehaviour
             {
                 LevelManager.instance.gemsCollected++;
 
-                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+                if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+                    if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
 
                 isCollected = true;
                 Destroy(gameObject);
@@ -43,8 +44,9 @@ public class Pickup : MonoBehaviour
                 { 
                     PlayerHealthControl.instance.HealPlayer();
 
-                    if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Success);
+                    if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+                        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                            HapticPatterns.PlayPreset(HapticPatterns.PresetType.Success);
 
                     isCollected = true;
                     Destroy(gameObject);

@@ -1,22 +1,38 @@
 using SharpConfig;
-using UnityEngine;
+using System;
 using System.IO;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance { get; private set; }
 
-    private Configuration config;
-    private string configPath;
-
-    // 公开的配置属性（其他脚本通过这里访问）
+    // 配置数据
     public float MusicVolume { get; private set; }
     public float SoundEffectsVolume { get; private set; }
     public bool IsMuted { get; private set; }
     public bool IsVibrationEnabled { get; private set; }
-    public string Resolution { get; private set; }      // 例如 "1920x1080"
+    public string Resolution { get; private set; }
     public bool IsFullscreen { get; private set; }
     public bool ShowFPS { get; private set; }
+
+    // 事件（供 UI 和音频系统订阅）
+    public static event Action<float> OnMusicVolumeChanged;
+    public static event Action<float> OnSoundEffectsVolumeChanged;
+    public static event Action<bool> OnMutedChanged;
+    public static event Action<bool> OnVibrationChanged;
+    public static event Action<bool> OnShowFPSChanged;
+
+    private Configuration config;
+    private string configPath;
+
+    // 音频应用（需要 AudioManager 或直接引用 AudioMixer）
+    [Header("Audio Mixer Settings")]
+    public AudioMixer mainMixer;                  // 拖入你的 Main Mixer
+    public string musicVolumeParam = "MusicVolume";      // Mixer 中暴露的参数名
+    public string sfxVolumeParam = "SoundEffectVolume"; // Mixer 中暴露的参数名
 
     private void Awake()
     {
@@ -26,7 +42,7 @@ public class GameSettings : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             configPath = Path.Combine(Application.persistentDataPath, "settings.cfg");
             LoadSettings();
-            ApplySettings();   // 立即生效
+            ApplyAudioSettings();
         }
         else
         {
@@ -34,9 +50,6 @@ public class GameSettings : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 加载配置文件，若不存在则创建默认配置
-    /// </summary>
     private void LoadSettings()
     {
         try
@@ -48,155 +61,205 @@ public class GameSettings : MonoBehaviour
             }
             else
             {
-                // 创建默认配置
                 config = new Configuration();
                 SetDefaultSettings();
                 SaveSettings();
                 Debug.Log($"未找到配置文件，已创建默认配置: {configPath}");
             }
 
-            // 从 config 读取到成员变量
+            // 读取值
             MusicVolume = config["Music"]["Volume"].GetValue<float>();
             SoundEffectsVolume = config["Music"]["SoundEffectsVolume"].GetValue<float>();
             IsMuted = config["Music"]["Muted"].GetValue<bool>();
             IsVibrationEnabled = config["Music"]["VibrationEnabled"].GetValue<bool>();
-
             Resolution = config["Display"]["Resolution"].GetValue<string>();
             IsFullscreen = config["Display"]["Fullscreen"].GetValue<bool>();
-
             ShowFPS = config["Debug"]["ShowFPS"].GetValue<bool>();
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError($"加载配置失败: {e.Message}，使用默认值");
             SetDefaultSettings();
         }
     }
 
-    /// <summary>
-    /// 写入默认值
-    /// </summary>
     private void SetDefaultSettings()
     {
-        // Music 节
-        config["Music"]["Volume"].FloatValue = 0.8f;
-        config["Music"]["SoundEffectsVolume"].FloatValue = 0.7f;
-        config["Music"]["Muted"].BoolValue = false;
-        config["Music"]["VibrationEnabled"].BoolValue = true;
-
-        // Display 节
-        config["Display"]["Resolution"].StringValue = Screen.currentResolution.width + "x" + Screen.currentResolution.height;
-        config["Display"]["Fullscreen"].BoolValue = Screen.fullScreen;
-
-        // Debug 节
-        config["Debug"]["ShowFPS"].BoolValue = false;
-
-        // 同步到属性
         MusicVolume = 0.8f;
         SoundEffectsVolume = 0.7f;
         IsMuted = false;
         IsVibrationEnabled = true;
-        Resolution = config["Display"]["Resolution"].StringValue;
-        IsFullscreen = true;
+        Resolution = GetHighestResolution();   // 改为最高分辨率
+        IsFullscreen = true;                   // 默认全屏
         ShowFPS = false;
-    }
 
-    /// <summary>
-    /// 保存当前设置到文件
-    /// </summary>
-    public void SaveSettings()
-    {
-        // 先将当前属性值写回 config 对象
+        // 写入 config 对象
         config["Music"]["Volume"].FloatValue = MusicVolume;
         config["Music"]["SoundEffectsVolume"].FloatValue = SoundEffectsVolume;
         config["Music"]["Muted"].BoolValue = IsMuted;
         config["Music"]["VibrationEnabled"].BoolValue = IsVibrationEnabled;
-
         config["Display"]["Resolution"].StringValue = Resolution;
         config["Display"]["Fullscreen"].BoolValue = IsFullscreen;
+        config["Debug"]["ShowFPS"].BoolValue = ShowFPS;
+    }
 
+    public void SaveSettings()
+    {
+        // 将当前属性写回 config
+        config["Music"]["Volume"].FloatValue = MusicVolume;
+        config["Music"]["SoundEffectsVolume"].FloatValue = SoundEffectsVolume;
+        config["Music"]["Muted"].BoolValue = IsMuted;
+        config["Music"]["VibrationEnabled"].BoolValue = IsVibrationEnabled;
+        config["Display"]["Resolution"].StringValue = Resolution;
+        config["Display"]["Fullscreen"].BoolValue = IsFullscreen;
         config["Debug"]["ShowFPS"].BoolValue = ShowFPS;
 
-        // 写入文件
         config.SaveToFile(configPath);
         Debug.Log($"配置已保存至: {configPath}");
     }
 
-    /// <summary>
-    /// 应用设置（例如调整音量、全屏等）
-    /// </summary>
-    private void ApplySettings()
-    {
-        // 应用音频（示例，实际需要配合 AudioMixer 或 AudioSource）
-        AudioListener.volume = IsMuted ? 0 : MusicVolume;  // 静音时总音量0
-        // 音效音量需要你自己管理，比如通过一个全局 AudioSource 组件的 volume
-
-        // 应用全屏和分辨率
-        Screen.fullScreen = IsFullscreen;
-        if (!IsFullscreen)
-        {
-            // 解析分辨率字符串 "1920x1080"
-            string[] res = Resolution.Split('x');
-            if (res.Length == 2 && int.TryParse(res[0], out int width) && int.TryParse(res[1], out int height))
-            {
-                Screen.SetResolution(width, height, false);
-            }
-        }
-
-        // 是否显示 FPS 由你的 FPS 显示脚本来读取 ShowFPS 属性
-    }
-
-    // ---------- 对外修改接口（修改后自动保存） ----------
+    // ---------- 公开修改方法 ----------
     public void SetMusicVolume(float value)
     {
         MusicVolume = Mathf.Clamp01(value);
         SaveSettings();
-        ApplySettings();
+        OnMusicVolumeChanged?.Invoke(MusicVolume);
+        ApplyAudioSettings();
     }
 
     public void SetSoundEffectsVolume(float value)
     {
         SoundEffectsVolume = Mathf.Clamp01(value);
         SaveSettings();
-        ApplySettings();
+        OnSoundEffectsVolumeChanged?.Invoke(SoundEffectsVolume);
+        ApplyAudioSettings();
     }
 
     public void SetMuted(bool muted)
     {
         IsMuted = muted;
         SaveSettings();
-        ApplySettings();
+        OnMutedChanged?.Invoke(IsMuted);
+        ApplyAudioSettings();
     }
 
     public void SetVibrationEnabled(bool enabled)
     {
         IsVibrationEnabled = enabled;
         SaveSettings();
-        // 震动设置通常不需要立即生效，下次震动时判断即可
+        OnVibrationChanged?.Invoke(IsVibrationEnabled);
     }
 
-    public void SetResolution(string resolution)  // 例如 "1280x720"
+    public void SetResolution(string resolution, bool fullscreen)
     {
         Resolution = resolution;
+        IsFullscreen = fullscreen;
         SaveSettings();
-        ApplySettings();
+        ApplyDisplaySettings();
     }
 
     public void SetFullscreen(bool fullscreen)
     {
         IsFullscreen = fullscreen;
         SaveSettings();
-        ApplySettings();
+        ApplyDisplaySettings();
     }
-
-    // 事件：当 ShowFPS 值改变时触发
-    public static event System.Action<bool> OnShowFPSChanged;
 
     public void SetShowFPS(bool show)
     {
         ShowFPS = show;
         SaveSettings();
-        // 触发事件，通知所有订阅者
-        OnShowFPSChanged?.Invoke(show);
+        OnShowFPSChanged?.Invoke(ShowFPS);
+    }
+
+    /// <summary>
+    /// 重置所有音乐/音效/震动/静音设置为默认值
+    /// </summary>
+    public void ResetMusicSettings()
+    {
+        MusicVolume = 0.8f;
+        SoundEffectsVolume = 0.7f;
+        IsMuted = false;
+        IsVibrationEnabled = true;
+
+        // 保存到文件
+        SaveSettings();
+
+        // 触发事件，通知 UI 更新
+        OnMusicVolumeChanged?.Invoke(MusicVolume);
+        OnSoundEffectsVolumeChanged?.Invoke(SoundEffectsVolume);
+        OnMutedChanged?.Invoke(IsMuted);
+        OnVibrationChanged?.Invoke(IsVibrationEnabled);
+
+        // 立即应用到音频设备
+        ApplyAudioSettings();
+    }
+
+    /// <summary>
+    /// 重置显示相关设置为默认值（全屏、分辨率）
+    /// </summary>
+    public void ResetDisplaySettings()
+    {
+        IsFullscreen = true;
+        Resolution = GetHighestResolution();   // 重置为最高分辨率
+        SaveSettings();
+        ApplyDisplaySettings();
+
+        // 可选：触发事件（如果你需要 UI 单独监听）
+    }
+
+    // ---------- 立即应用设置到硬件/音频 ----------
+    private void ApplyAudioSettings()
+    {
+        // 更新常规的 AudioManager（游戏内音频）
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.SetMusicVolume(MusicVolume);
+            AudioManager.instance.SetSoundEffectsVolume(SoundEffectsVolume);
+            AudioManager.instance.SetMuted(IsMuted);
+        }
+
+        // 更新主菜单音频管理器（如果存在）
+        if (MainMenuAudioManager.instance != null)
+        {
+            MainMenuAudioManager.instance.SetMusicVolume(MusicVolume);
+            MainMenuAudioManager.instance.SetMuted(IsMuted);
+        }
+    }
+
+    private void ApplyDisplaySettings()
+    {
+        Screen.fullScreen = IsFullscreen;
+        if (!IsFullscreen)
+        {
+            string[] res = Resolution.Split('x');
+            if (res.Length == 2 && int.TryParse(res[0], out int w) && int.TryParse(res[1], out int h))
+            {
+                Screen.SetResolution(w, h, false);
+            }
+            else
+            {
+                Debug.LogWarning($"分辨率格式无效: {Resolution}，已忽略。");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 获取当前显示器支持的最高分辨率（宽*高最大）
+    /// </summary>
+    private string GetHighestResolution()
+    {
+        var resolutions = Screen.resolutions;
+        if (resolutions == null || resolutions.Length == 0)
+            return "1920x1080"; // 保底默认值
+
+        // 按宽高乘积降序排序，取第一个
+        var highest = resolutions.OrderByDescending(res => res.width * res.height).First();
+        return $"{highest.width}x{highest.height}";
+    }
+
+    private float LinearToDecibel(float linear)
+    {
+        return linear <= 0.0001f ? -80f : Mathf.Log10(linear) * 20f;
     }
 }

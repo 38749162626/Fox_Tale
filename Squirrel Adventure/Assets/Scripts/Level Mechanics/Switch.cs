@@ -37,8 +37,9 @@ public class Switch : MonoBehaviour
             spriteRenderer.sprite = downSprite;
             hasSwitch = true;
 
-            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-                HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
+            if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+                if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact);
         }
     }
 }

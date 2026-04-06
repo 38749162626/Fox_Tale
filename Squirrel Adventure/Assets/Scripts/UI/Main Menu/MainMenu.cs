@@ -60,8 +60,9 @@ public class MainMenu : MonoBehaviour
     {
         userNameWarring.SetActive(true);
 
-        if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
-            HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+        if (GameSettings.Instance != null && GameSettings.Instance.IsVibrationEnabled)
+            if (GamepadRumbler.IsConnected() || Application.isMobilePlatform)
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
 
         yield return new WaitForSeconds(2f);
 
